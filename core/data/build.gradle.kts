@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core:network"))
+    implementation(project(":core:model"))
 
     implementation(libs.coreKtx)
     implementation(platform(libs.kotlinBom))

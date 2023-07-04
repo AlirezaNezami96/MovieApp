@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "alireza.nezami.designsystem"
+    namespace = "alireza.nezami.domain"
     compileSdk = 33
 
     defaultConfig {
@@ -34,11 +34,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
     implementation(project(":core:model"))
-
-    api(libs.material3)
-    api(libs.androidx.compose.runtime)
-    api(libs.toolingPreview)
-    implementation(libs.coreKtx)
-    implementation(libs.coil.kt.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.kotlinx.coroutines.android)
 }
