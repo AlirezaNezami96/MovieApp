@@ -10,6 +10,13 @@ lifecycleRuntimeKtxVersion = "2.3.1"
 composeBomVersion = "2022.10.00"
 material3Version = "1.1.1"
 toolingPreviewVersion = "1.4.3"
+kotlinxSerializationJson = "1.5.1"
+retrofitKotlinxSerializationJson = "1.0.0"
+retrofit = "2.9.0"
+kotlinxCoroutines = "1.6.4"
+hilt = "2.46.1"
+androidxHiltNavigationCompose = "1.0.0"
+okhttp = "4.10.0"
 
 
 [libraries]
@@ -24,3 +31,11 @@ lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", ver
 composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version"}
 toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "toolingPreviewVersion" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
