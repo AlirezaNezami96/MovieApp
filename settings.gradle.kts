@@ -16,3 +16,6 @@ rootProject.name = "Movie App"
 include(":app")
 include(":core:data")
 include(":core:network")
+include(":core:database")
+include(":core:designSystem")
+include(":core:model")
