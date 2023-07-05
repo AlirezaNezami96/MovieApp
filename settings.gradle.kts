@@ -13,4 +13,12 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Movie App"
-include ':app'
+include(":app")
+include(":core:data")
+include(":core:network")
+include(":core:database")
+include(":core:designSystem")
+include(":core:model")
+include(":core:domain")
+include(":core:ui")
+include(":core:common")

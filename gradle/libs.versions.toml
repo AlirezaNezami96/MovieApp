@@ -1,0 +1,48 @@
+[versions]
+kotlin = "1.8.10"
+composeVersion = "1.4.3"
+coreKtx = "1.8.0"
+lifecycleRunTimeKtx = "2.3.1"
+activityCompose = "1.5.1"
+composeCompiler = "2022.10.00"
+kotlinBomVersion = "1.8.0"
+lifecycleRuntimeKtxVersion = "2.3.1"
+composeBomVersion = "2022.10.00"
+material3Version = "1.1.1"
+toolingPreviewVersion = "1.4.3"
+kotlinxSerializationJson = "1.5.1"
+retrofitKotlinxSerializationJson = "1.0.0"
+retrofit = "2.9.0"
+kotlinxCoroutines = "1.6.4"
+hilt = "2.46.1"
+androidxHiltNavigationCompose = "1.0.0"
+okhttp = "4.10.0"
+roomVersion = "2.5.2"
+coil = "2.2.2"
+
+
+[libraries]
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+lifecycleRunTimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRunTimeKtx" }
+activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+ui = { module = "androidx.compose.ui:ui", version.ref = "composeVersion" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+uiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "composeVersion" }
+kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinBomVersion" }
+lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
+composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version"}
+toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "toolingPreviewVersion" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
