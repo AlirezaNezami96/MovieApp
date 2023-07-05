@@ -11,8 +11,8 @@ interface NetworkDataSource {
 
     suspend fun getGenreList(): List<Nothing>
 
-    suspend fun getMovieDetail(id: Int? = null): List<Nothing>
+    suspend fun getMovieDetail(id: Int): List<Nothing>
 
-    suspend fun searchMovies(query: String? = null): List<Nothing>
+    suspend fun searchMovies(query: String? = null, page: Int? = null): List<Nothing>
 
 }
