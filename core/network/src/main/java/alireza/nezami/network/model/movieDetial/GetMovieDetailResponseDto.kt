@@ -1,7 +1,12 @@
 package alireza.nezami.network.model.movieDetial
 
 
-import alireza.nezami.network.model.genre.Genre
+import alireza.nezami.common.extensions.orFalse
+import alireza.nezami.common.extensions.orZero
+import alireza.nezami.model.movieDetial.BelongsToCollection
+import alireza.nezami.model.movieDetial.MovieDetail
+import alireza.nezami.network.model.genre.GenreResponse
+import alireza.nezami.network.model.genre.asExternalModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,11 +17,11 @@ data class GetMovieDetailResponseDto(
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
     @SerialName("belongs_to_collection")
-    val belongsToCollection: BelongsToCollection? = null,
+    val belongsToCollection: BelongsToCollectionDto? = null,
     @SerialName("budget")
     val budget: Int? = null,
     @SerialName("genres")
-    val genres: List<Genre?>? = null,
+    val genres: List<GenreResponse?>? = null,
     @SerialName("homepage")
     val homepage: String? = null,
     @SerialName("id")
@@ -34,9 +39,9 @@ data class GetMovieDetailResponseDto(
     @SerialName("poster_path")
     val posterPath: String? = null,
     @SerialName("production_companies")
-    val productionCompanies: List<ProductionCompany?>? = null,
+    val productionCompanies: List<ProductionCompanyDto?>? = null,
     @SerialName("production_countries")
-    val productionCountries: List<ProductionCountry?>? = null,
+    val productionCountries: List<ProductionCountryDto?>? = null,
     @SerialName("release_date")
     val releaseDate: String? = null,
     @SerialName("revenue")
@@ -44,7 +49,7 @@ data class GetMovieDetailResponseDto(
     @SerialName("runtime")
     val runtime: Int? = null,
     @SerialName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage?>? = null,
+    val spokenLanguages: List<SpokenLanguageDto?>? = null,
     @SerialName("status")
     val status: String? = null,
     @SerialName("tagline")
@@ -58,3 +63,33 @@ data class GetMovieDetailResponseDto(
     @SerialName("vote_count")
     val voteCount: Int? = null
 )
+
+fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
+    return MovieDetail(
+        adult = this?.adult.orFalse(),
+        backdropPath = this?.backdropPath.orEmpty(),
+        belongsToCollection = this?.belongsToCollection.asExternalModel(),
+        budget = this?.budget.orZero(),
+        genres = this?.genres?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
+        homepage = this?.homepage.orEmpty(),
+        id = this?.id.orZero(),
+        imdbId = this?.imdbId.orEmpty(),
+        originalLanguage = this?.originalLanguage.orEmpty(),
+        originalTitle = this?.originalTitle.orEmpty(),
+        overview = this?.overview.orEmpty(),
+        popularity = this?.popularity.orZero(),
+        posterPath = this?.posterPath.orEmpty(),
+        productionCompanies = this?.productionCompanies?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
+        productionCountries = this?.productionCountries?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
+        releaseDate = this?.releaseDate.orEmpty(),
+        revenue = this?.revenue.orZero(),
+        runtime = this?.runtime.orZero(),
+        spokenLanguages = this?.spokenLanguages?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
+        status = this?.status.orEmpty(),
+        tagline = this?.tagline.orEmpty(),
+        title = this?.title.orEmpty(),
+        video = this?.video.orFalse(),
+        voteAverage = this?.voteAverage.orZero(),
+        voteCount = this?.voteCount.orZero()
+    )
+}
