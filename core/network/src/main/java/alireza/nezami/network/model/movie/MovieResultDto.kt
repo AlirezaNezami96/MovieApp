@@ -1,11 +1,16 @@
 package alireza.nezami.network.model.movie
 
 
+import alireza.nezami.common.extensions.orFalse
+import alireza.nezami.common.extensions.orZero
+import alireza.nezami.model.movie.Dates
+import alireza.nezami.model.movie.MovieResult
+import alireza.nezami.model.movie.Movies
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieResult(
+data class MovieResultDto(
     @SerialName("adult")
     val adult: Boolean? = null,
     @SerialName("backdrop_path")
@@ -35,3 +40,23 @@ data class MovieResult(
     @SerialName("vote_count")
     val voteCount: Int? = null
 )
+
+fun MovieResultDto?.asExternalModel(): MovieResult {
+    return MovieResult(
+        adult = this?.adult.orFalse(),
+        backdropPath = this?.backdropPath.orEmpty(),
+        genreIds = this?.genreIds?.mapNotNull { it } ?: emptyList(),
+        id = this?.id.orZero(),
+        originalLanguage = this?.originalLanguage.orEmpty(),
+        originalTitle = this?.originalTitle.orEmpty(),
+        overview = this?.overview.orEmpty(),
+        popularity = this?.popularity.orZero(),
+        posterPath = this?.posterPath.orEmpty(),
+        releaseDate = this?.releaseDate.orEmpty(),
+        title = this?.title.orEmpty(),
+        video = this?.video.orFalse(),
+        voteAverage = this?.voteAverage.orZero(),
+        voteCount = this?.voteCount.orZero()
+    )
+}
+

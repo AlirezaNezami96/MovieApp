@@ -41,4 +41,5 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(platform(libs.kotlinBom))
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.hilt.android)
 }

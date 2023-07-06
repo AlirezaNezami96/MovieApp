@@ -1,11 +1,12 @@
 package alireza.nezami.network.model.movieDetial
 
 
+import alireza.nezami.model.movieDetial.SpokenLanguage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SpokenLanguage(
+data class SpokenLanguageDto(
     @SerialName("english_name")
     val englishName: String? = null,
     @SerialName("iso_639_1")
@@ -13,3 +14,11 @@ data class SpokenLanguage(
     @SerialName("name")
     val name: String? = null
 )
+
+fun SpokenLanguageDto?.asExternalModel(): SpokenLanguage {
+    return SpokenLanguage(
+        englishName = this?.englishName.orEmpty(),
+        iso6391 = this?.iso6391.orEmpty(),
+        name = this?.name.orEmpty()
+    )
+}
