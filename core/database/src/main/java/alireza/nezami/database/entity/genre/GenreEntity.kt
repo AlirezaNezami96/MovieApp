@@ -7,7 +7,6 @@ import androidx.room.Fts4
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "genre")
-@Fts4
 data class GenreEntity(
 
     @ColumnInfo(name = "name")

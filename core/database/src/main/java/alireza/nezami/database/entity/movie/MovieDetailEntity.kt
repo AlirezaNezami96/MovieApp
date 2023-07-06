@@ -1,9 +1,11 @@
 package alireza.nezami.database.entity.movie
 
+import alireza.nezami.database.converter.BelongsToCollectionTypeConverter
 import alireza.nezami.database.converter.GenreListTypeConverter
 import alireza.nezami.database.converter.ProductionCompanyListTypeConverter
 import alireza.nezami.database.converter.ProductionCountryListTypeConverter
 import alireza.nezami.database.converter.SpokenLanguageListTypeConverter
+import alireza.nezami.database.entity.genre.GenreEntity
 import alireza.nezami.model.genre.Genre
 import alireza.nezami.model.movieDetial.ProductionCompany
 import alireza.nezami.model.movieDetial.ProductionCountry
@@ -18,9 +20,11 @@ data class MovieDetailEntity(
     val id: Int,
     val adult: Boolean,
     val backdropPath: String,
+    @TypeConverters(BelongsToCollectionTypeConverter::class)
     val belongsToCollection: BelongsToCollectionEntity,
     val budget: Int,
-    val genres: List<Genre>,
+    @TypeConverters(GenreListTypeConverter::class)
+    val genres: List<GenreEntity>,
     val homepage: String,
     val imdbId: String,
     val originalLanguage: String,
@@ -28,11 +32,14 @@ data class MovieDetailEntity(
     val overview: String,
     val popularity: Double,
     val posterPath: String,
+    @TypeConverters(ProductionCompanyListTypeConverter::class)
     val productionCompanies: List<ProductionCompanyEntity>,
+    @TypeConverters(ProductionCountryListTypeConverter::class)
     val productionCountries: List<ProductionCountryEntity>,
     val releaseDate: String,
     val revenue: Int,
     val runtime: Int,
+    @TypeConverters(SpokenLanguageListTypeConverter::class)
     val spokenLanguages: List<SpokenLanguageEntity>,
     val status: String,
     val tagline: String,
@@ -41,16 +48,4 @@ data class MovieDetailEntity(
     val voteAverage: Double,
     val voteCount: Int,
     val favoriteAddTime: String
-) {
-    @TypeConverters(GenreListTypeConverter::class)
-    lateinit var genresTypeConverter: List<Genre>
-
-    @TypeConverters(ProductionCompanyListTypeConverter::class)
-    lateinit var productionCompaniesTypeConverter: List<ProductionCompany>
-
-    @TypeConverters(ProductionCountryListTypeConverter::class)
-    lateinit var productionCountriesTypeConverter: List<ProductionCountry>
-
-    @TypeConverters(SpokenLanguageListTypeConverter::class)
-    lateinit var spokenLanguagesTypeConverter: List<SpokenLanguage>
-}
+)

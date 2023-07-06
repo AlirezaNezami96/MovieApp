@@ -1,5 +1,7 @@
 package alireza.nezami.network.di
 
+import alireza.nezami.network.dispatcher.Dispatcher
+import alireza.nezami.network.dispatcher.Dispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +23,6 @@ object CoroutineScopesModule {
     @Singleton
     @ApplicationScope
     fun providesCoroutineScope(
-        @Dispatcher(Default) dispatcher: CoroutineDispatcher,
+        @Dispatcher(Dispatchers.Default) dispatcher: CoroutineDispatcher,
     ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
 }

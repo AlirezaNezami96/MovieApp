@@ -16,6 +16,7 @@
 
 package alireza.nezami.database
 
+import alireza.nezami.database.converter.BelongsToCollectionTypeConverter
 import alireza.nezami.database.converter.GenreListTypeConverter
 import alireza.nezami.database.converter.ProductionCompanyListTypeConverter
 import alireza.nezami.database.converter.ProductionCountryListTypeConverter
@@ -47,6 +48,7 @@ import androidx.room.TypeConverters
     )
 @TypeConverters(
     GenreListTypeConverter::class,
+    BelongsToCollectionTypeConverter::class,
     ProductionCompanyListTypeConverter::class,
     ProductionCountryListTypeConverter::class,
     SpokenLanguageListTypeConverter::class,
