@@ -10,7 +10,7 @@ data class MovieResult(
     val overview: String,
     val popularity: Double,
     val posterPath: String,
-    val release_date: String,
+    val releaseDate: String,
     val title: String,
     val video: Boolean,
     val voteAverage: Double,
