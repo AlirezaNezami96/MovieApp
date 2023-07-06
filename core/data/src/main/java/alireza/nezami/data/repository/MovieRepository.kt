@@ -33,7 +33,7 @@ interface MovieRepository {
     /*
         Gets the Movie detail for a specific movie id
      */
-    suspend fun getMovieDetail(id: Int? = null): Flow<MovieDetail>
+    suspend fun getMovieDetail(id: Int): Flow<MovieDetail>
 
 
 }
