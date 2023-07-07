@@ -13,5 +13,4 @@ interface GenreRepository {
      * Gets the genre list from either LocalDB or Network (Offline first)
      */
     suspend fun getGenreList(): Flow<List<Genre>>
-
 }

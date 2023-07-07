@@ -14,5 +14,4 @@ interface SearchRepository {
      * Query the movies with the [query] and returns it as a [Flow] of [Movies]
      */
     suspend fun searchForMovies(query: String? = null, page: Int? = null): Flow<Search>
-
 }
