@@ -2,6 +2,7 @@ package alireza.nezami.data.repository
 
 import alireza.nezami.model.search.Search
 import alireza.nezami.network.dataSource.NetworkDataSource
+import alireza.nezami.network.model.search.SearchMovieResponseDto
 import alireza.nezami.network.model.search.asExternalModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -13,8 +14,6 @@ class SearchRepositoryImpl @Inject constructor(
 
     override suspend fun searchForMovies(query: String?, page: Int?): Flow<Search> =
         networkDataSource.searchMovies(page = page, query = query)
-            .map {
-                it.asExternalModel()
-            }
+            .map (SearchMovieResponseDto::asExternalModel)
 
 }

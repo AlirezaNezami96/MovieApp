@@ -1,6 +1,6 @@
 package alireza.nezami.model.movie
 
-data class MovieResult(
+data class Movie(
     val adult: Boolean,
     val backdropPath: String,
     val genreIds: List<Int>,
