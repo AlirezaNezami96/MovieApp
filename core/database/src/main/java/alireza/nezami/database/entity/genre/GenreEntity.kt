@@ -16,7 +16,7 @@ data class GenreEntity(
     val id: Int
 )
 
-fun GenreEntity.asEntity() = Genre(
+fun GenreEntity.asExternalModel() = Genre(
     id = id,
     name = name
 )

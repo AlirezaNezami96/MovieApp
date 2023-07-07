@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GetGenreListResponseDto(
     @SerialName("genres")
-    val genres: List<GenreResponse?>? = null
+    val genres: List<GenreResponse>? = null
 )
