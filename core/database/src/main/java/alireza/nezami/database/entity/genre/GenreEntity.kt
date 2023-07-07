@@ -16,7 +16,7 @@ data class GenreEntity(
     val id: Int
 )
 
-fun GenreEntity.asFtsEntity() = Genre(
+fun GenreEntity.asEntity() = Genre(
     id = id,
     name = name
 )

@@ -3,9 +3,7 @@ package alireza.nezami.network.model.movie
 
 import alireza.nezami.common.extensions.orFalse
 import alireza.nezami.common.extensions.orZero
-import alireza.nezami.model.movie.Dates
-import alireza.nezami.model.movie.MovieResult
-import alireza.nezami.model.movie.Movies
+import alireza.nezami.model.movie.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -41,8 +39,8 @@ data class MovieResultDto(
     val voteCount: Int? = null
 )
 
-fun MovieResultDto?.asExternalModel(): MovieResult {
-    return MovieResult(
+fun MovieResultDto?.asExternalModel(): Movie {
+    return Movie(
         adult = this?.adult.orFalse(),
         backdropPath = this?.backdropPath.orEmpty(),
         genreIds = this?.genreIds?.mapNotNull { it } ?: emptyList(),

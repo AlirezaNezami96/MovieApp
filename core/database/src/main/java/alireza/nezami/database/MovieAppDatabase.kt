@@ -16,19 +16,12 @@
 
 package alireza.nezami.database
 
-import alireza.nezami.database.converter.BelongsToCollectionTypeConverter
-import alireza.nezami.database.converter.GenreListTypeConverter
-import alireza.nezami.database.converter.ProductionCompanyListTypeConverter
-import alireza.nezami.database.converter.ProductionCountryListTypeConverter
-import alireza.nezami.database.converter.SpokenLanguageListTypeConverter
 import alireza.nezami.database.dao.FavoriteDao
 import alireza.nezami.database.dao.GenreDao
 import alireza.nezami.database.entity.genre.GenreEntity
-import alireza.nezami.database.entity.movie.BelongsToCollectionEntity
-import alireza.nezami.database.entity.movie.MovieDetailEntity
-import alireza.nezami.database.entity.movie.ProductionCompanyEntity
-import alireza.nezami.database.entity.movie.ProductionCountryEntity
-import alireza.nezami.database.entity.movie.SpokenLanguageEntity
+import alireza.nezami.database.entity.movie.MovieEntity
+import alireza.nezami.database.util.GenreIdsTypeConverter
+import alireza.nezami.database.util.GenreListTypeConverter
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -36,22 +29,14 @@ import androidx.room.TypeConverters
 @Database(
     entities = [
         GenreEntity::class,
-        BelongsToCollectionEntity::class,
-        MovieDetailEntity::class,
-        ProductionCompanyEntity::class,
-        ProductionCountryEntity::class,
-        SpokenLanguageEntity::class,
+        MovieEntity::class
     ],
     version = 1,
-    exportSchema = true,
-
-    )
+    exportSchema = true
+)
 @TypeConverters(
     GenreListTypeConverter::class,
-    BelongsToCollectionTypeConverter::class,
-    ProductionCompanyListTypeConverter::class,
-    ProductionCountryListTypeConverter::class,
-    SpokenLanguageListTypeConverter::class,
+    GenreIdsTypeConverter::class
 )
 abstract class MovieAppDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao

@@ -16,7 +16,7 @@
 
 package alireza.nezami.database.dao
 
-import alireza.nezami.database.entity.movie.MovieDetailEntity
+import alireza.nezami.database.entity.movie.MovieEntity
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -25,23 +25,23 @@ import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 /**
- * DAO for [MovieDetailEntity] access
+ * DAO for [MovieEntity] access
  */
 @Dao
 interface FavoriteDao {
 
     /**
-     * Fetches movie detail that match the query parameters
+     * Fetches movie list that match the query parameters
      */
     @Transaction
-    @Query(value = "SELECT * FROM favorite ORDER BY favoriteAddTime DESC")
-    fun getMovieDetail(): Flow<MovieDetailEntity>
+    @Query(value = "SELECT * FROM favorites")
+    fun getMovieDetail(): Flow<MovieEntity>
 
     /**
      * Inserts [entity] into the db if they don't exist, and replaces those that do
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrReplaceMovieToFavorite(entity: MovieDetailEntity)
+    suspend fun insertOrReplaceMovieToFavorite(entity: MovieEntity)
 
 
     /**
@@ -49,7 +49,7 @@ interface FavoriteDao {
      */
     @Query(
         value = """
-            DELETE FROM favorite
+            DELETE FROM favorites
             WHERE id is (:id)
         """,
     )
