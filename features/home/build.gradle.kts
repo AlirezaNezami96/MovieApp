@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -36,8 +37,16 @@ android {
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:domain"))
+    implementation(project(":core:common"))
 
     implementation(libs.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
+    api(libs.material3)
+    api(libs.androidx.compose.runtime)
+    api(libs.toolingPreview)
+    api(libs.viewModelCompose)
+    implementation(libs.coreKtx)
+    implementation(libs.coil.kt.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
 }

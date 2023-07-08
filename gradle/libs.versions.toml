@@ -20,6 +20,7 @@ okhttp = "4.10.0"
 roomVersion = "2.5.2"
 coil = "2.2.2"
 viewModelVersion = "2.6.1"
+viewModelComposeVersion = ":2.6.1"
 timber = "4.7.1"
 
 
@@ -27,6 +28,7 @@ timber = "4.7.1"
 kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewModelVersion" }
+viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewModelComposeVersion" }
 lifecycleRunTimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRunTimeKtx" }
 activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "composeVersion" }
