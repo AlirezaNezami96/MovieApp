@@ -36,14 +36,15 @@ data class MovieResultDto(
     @SerialName("vote_average")
     val voteAverage: Double? = null,
     @SerialName("vote_count")
-    val voteCount: Int? = null
-)
+    val voteCount: Int? = null,
+
+    var genreNames: List<String> = emptyList(),
+    )
 
 fun MovieResultDto?.asExternalModel(): Movie {
     return Movie(
         adult = this?.adult.orFalse(),
         backdropPath = this?.backdropPath.orEmpty(),
-        genreIds = this?.genreIds?.mapNotNull { it } ?: emptyList(),
         id = this?.id.orZero(),
         originalLanguage = this?.originalLanguage.orEmpty(),
         originalTitle = this?.originalTitle.orEmpty(),

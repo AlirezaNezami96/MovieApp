@@ -50,6 +50,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":features:home"))
+
     implementation(libs.coreKtx)
     implementation(platform(libs.kotlinBom))
     implementation(libs.lifecycleRuntimeKtx)

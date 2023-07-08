@@ -25,7 +25,6 @@ class GetFavoriteMoviesUseCase @Inject constructor(
                 FavoriteMoviesSortType.POPULARITY -> movies.sortedByDescending { it.popularity }
                 FavoriteMoviesSortType.VOTE_AVERAGE -> movies.sortedByDescending { it.voteAverage }
                 FavoriteMoviesSortType.RELEASE_DATE -> movies.sortedByDescending { it.releaseDate }
-                FavoriteMoviesSortType.GENRE -> movies.sortedBy { it.genreIds.joinToString() }
                 else -> movies
             }
         }
@@ -36,7 +35,6 @@ enum class FavoriteMoviesSortType {
     NONE,
     POPULARITY,
     VOTE_AVERAGE,
-    RELEASE_DATE,
-    GENRE
+    RELEASE_DATE
 }
 

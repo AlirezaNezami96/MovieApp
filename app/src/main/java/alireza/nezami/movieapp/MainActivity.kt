@@ -1,5 +1,6 @@
 package alireza.nezami.movieapp
 
+import alireza.nezami.home.presentation.movieList.MoviesScreen
 import alireza.nezami.movieapp.ui.theme.MovieAppTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MovieAppTheme {
-
+                MoviesScreen()
             }
         }
     }
