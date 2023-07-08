@@ -20,13 +20,13 @@ class GenreListTypeConverter {
 
 class GenreIdsTypeConverter {
     @TypeConverter
-    fun fromGenreIds(genreIds: List<Int>): String {
+    fun fromGenreIds(genreIds: List<String>): String {
         return genreIds.joinToString(",")
     }
 
     @TypeConverter
-    fun toGenreIds(genreIdsString: String): List<Int> {
-        return genreIdsString.split(",").mapNotNull { it.toIntOrNull() }
+    fun toGenreIds(genreIdsString: String): List<String> {
+        return genreIdsString.split(",")
     }
 }
 
