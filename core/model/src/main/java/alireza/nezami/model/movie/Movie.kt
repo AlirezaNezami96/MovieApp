@@ -3,7 +3,7 @@ package alireza.nezami.model.movie
 data class Movie(
     val adult: Boolean,
     val backdropPath: String,
-    val genreIds: List<Int>,
+    val genreNames: List<String> = emptyList(),
     val id: Int,
     val originalLanguage: String,
     val originalTitle: String,
