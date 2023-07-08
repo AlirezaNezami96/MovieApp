@@ -1,4 +1,4 @@
-package alireza.nezami.network.result
+package alireza.nezami.common.result
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
