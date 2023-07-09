@@ -1,11 +1,11 @@
 package alireza.nezami.movieapp.navigation
 
 import alireza.nezami.home.navigation.moviesNavigationRoute
-import alireza.nezami.home.navigation.moviesScreen
 import alireza.nezami.movieapp.ui.AppState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 
 /**
  * Top-level navigation graph.
@@ -27,7 +27,12 @@ fun AppNavHost(
         modifier = modifier,
     ) {
         //todo: handle onMovieClick
-        moviesScreen(onMovieClick = {})
+        composable(
+            route = moviesNavigationRoute,
+        ) {
+//        MoviesScreen(onMovieClick)
+        }
+//        moviesScreen(onMovieClick = {})
 
         //todo: add more routes
     }
