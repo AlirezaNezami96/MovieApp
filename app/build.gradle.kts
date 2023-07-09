@@ -51,6 +51,8 @@ android {
 
 dependencies {
     implementation(project(":features:home"))
+    implementation(project(":core:data"))
+    implementation(project(":core:ui"))
 
     implementation(libs.coreKtx)
     implementation(platform(libs.kotlinBom))
@@ -61,5 +63,8 @@ dependencies {
     implementation(libs.uiGraphics)
     implementation(libs.toolingPreview)
     implementation(libs.material3)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+
 
 }
