@@ -13,7 +13,7 @@ data class MoviesUiState(
     val popularMovies: Movies = Movies.EMPTY,
     val nowPlayingMovies: Movies = Movies.EMPTY,
 
-    val selectedTab : MoviesTabState = MoviesTabState.NowPlaying,
+    val selectedTabIndex : Int = MoviesTabState.NowPlaying.index,
 
     val isLoading: Boolean = false,
     val isError: Boolean = false,
@@ -27,5 +27,7 @@ data class MoviesUiState(
         data class AddNowPlayingMovies(val topRatedMovies: Movies) : PartialState()
         data class ShowErrorDialog(val message: String) : PartialState()
         data class Loading(val show: Boolean) : PartialState()
+        data class ChangeTab(val selectedTabIndex: Int) : PartialState()
+
     }
 }

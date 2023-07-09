@@ -9,6 +9,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,7 +43,9 @@ import androidx.compose.ui.unit.dp
 fun SearchInput(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
-    onValueChange: (String) -> Unit
+    enabled: Boolean = false,
+    onValueChange: (String) -> Unit = {},
+    onParentClick: () -> Unit = {},
 ) {
     val (text, setText) = remember { mutableStateOf("") }
     val (isFocused, setFocused) = remember { mutableStateOf(false) }
@@ -50,13 +53,21 @@ fun SearchInput(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clickable {
+                if (!enabled) {
+                    onParentClick()
+                }
+            }
             .background(
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = 0.2f
+                ),
                 shape = MaterialTheme.shapes.medium
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextInput(
+            enabled = enabled,
             text = text,
             onValueChange = {
                 setText(it)
@@ -100,10 +111,12 @@ fun SearchInput(
 fun RowScope.TextInput(
     text: String,
     onValueChange: (String) -> Unit,
-    onFocusChanged: (isFocused: Boolean) -> Unit
+    onFocusChanged: (isFocused: Boolean) -> Unit,
+    enabled: Boolean
 ) {
     TextField(
         value = text,
+        enabled = enabled,
         onValueChange = onValueChange,
         modifier = Modifier
             .weight(1f)
@@ -114,10 +127,12 @@ fun RowScope.TextInput(
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
+            disabledContainerColor = Color.Transparent,
             focusedTextColor = MaterialTheme.colorScheme.onBackground,
             unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
 
         ),
         singleLine = true,
@@ -134,8 +149,7 @@ fun SearchIcon(
     modifier: Modifier = Modifier
 ) {
     Icon(
-        modifier = modifier
-            .padding(10.dp),
+        modifier = modifier,
         imageVector = Icons.Default.Search,
         contentDescription = "Search Icon",
         tint = MaterialTheme.colorScheme.onBackground

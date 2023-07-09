@@ -8,11 +8,12 @@ import alireza.nezami.home.presentation.movieList.contract.MoviesEvent
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
 import alireza.nezami.home.presentation.movieList.contract.MoviesUiState
 import androidx.lifecycle.SavedStateHandle
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -32,7 +33,7 @@ class MoviesViewModel @Inject constructor(
 
     override fun mapIntents(intent: MoviesIntent): Flow<MoviesUiState.PartialState> =
         when (intent) {
-            MoviesIntent.ChangeTab -> TODO()
+            is MoviesIntent.ChangeTab -> flowOf(MoviesUiState.PartialState.ChangeTab(intent.selectedTabIndex))
             is MoviesIntent.GetNowPlaying -> TODO()
             is MoviesIntent.GetPopular -> getPopularMovies(intent.page)
             is MoviesIntent.GetTopRated -> TODO()
@@ -65,6 +66,10 @@ class MoviesViewModel @Inject constructor(
                 isError = true,
                 errorMessage = partialState.message
             )
+
+            is MoviesUiState.PartialState.ChangeTab -> previousState.copy(
+                selectedTabIndex = partialState.selectedTabIndex
+            )
         }
 
 
@@ -81,6 +86,7 @@ class MoviesViewModel @Inject constructor(
             .catch {
                 emit(MoviesUiState.PartialState.ShowErrorDialog(it.message.orEmpty()))
             }
+            .collect()
     }
 
 

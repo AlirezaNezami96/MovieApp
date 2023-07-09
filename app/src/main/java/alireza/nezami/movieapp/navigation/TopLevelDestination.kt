@@ -15,7 +15,7 @@ enum class TopLevelDestination(
     HOME(
         selectedIcon = Icons.Rounded.Home,
         iconTextId = R.string.home,
-        titleTextId = R.string.home
+        titleTextId = R.string.what_do_you_want_to_watch
     ),
     SEARCH(
         selectedIcon = Icons.Rounded.Search,
