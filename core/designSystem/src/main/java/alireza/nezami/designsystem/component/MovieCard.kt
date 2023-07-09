@@ -25,9 +25,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun MovieCard(
@@ -96,23 +96,25 @@ fun MovieCard(
                     )
                     Text(
                         text = movieRating.toString(),
-                        color = Color.White,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.titleSmall.copy(
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
                 }
             }
 
             Text(
                 text = movieTitle,
-                style = MaterialTheme.typography.titleLarge.copy(
+                style = MaterialTheme.typography.headlineSmall.copy(
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 ),
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .fillMaxWidth(),
-                maxLines = 1
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
             Row(
@@ -130,7 +132,9 @@ fun MovieCard(
                     style = MaterialTheme.typography.titleSmall.copy(
                         color = MaterialTheme.colorScheme.onSurface,
                     ),
-                    modifier = Modifier.padding(start = 4.dp)
+                    modifier = Modifier.padding(start = 4.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
 
@@ -149,7 +153,9 @@ fun MovieCard(
                     style = MaterialTheme.typography.titleSmall.copy(
                         color = MaterialTheme.colorScheme.onSurface,
                     ),
-                    modifier = Modifier.padding(start = 4.dp)
+                    modifier = Modifier.padding(start = 4.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
 
@@ -168,7 +174,9 @@ fun MovieCard(
                     style = MaterialTheme.typography.titleSmall.copy(
                         color = MaterialTheme.colorScheme.onSurface
                     ),
-                    modifier = Modifier.padding(start = 4.dp)
+                    modifier = Modifier.padding(start = 4.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

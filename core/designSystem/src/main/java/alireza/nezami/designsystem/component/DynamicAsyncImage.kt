@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 
 /**
@@ -24,5 +25,6 @@ fun DynamicAsyncImage(
         contentDescription = contentDescription,
         colorFilter = if (iconTint != null) ColorFilter.tint(iconTint) else null,
         modifier = modifier,
+        contentScale = ContentScale.Crop
     )
 }
