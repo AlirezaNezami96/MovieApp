@@ -8,6 +8,8 @@ import alireza.nezami.data.repository.OfflineFavoriteRepository
 import alireza.nezami.data.repository.OfflineFirstGenreRepository
 import alireza.nezami.data.repository.SearchRepository
 import alireza.nezami.data.repository.SearchRepositoryImpl
+import alireza.nezami.data.util.ConnectivityManagerNetworkMonitor
+import alireza.nezami.data.util.NetworkMonitor
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -64,5 +66,11 @@ interface DataModule {
     fun bindsSearchRepository(
         repository: OfflineFavoriteRepository,
     ): FavoritesRepository
+
+
+    @Binds
+    fun bindsNetworkMonitor(
+        networkMonitor: ConnectivityManagerNetworkMonitor,
+    ): NetworkMonitor
 
 }
