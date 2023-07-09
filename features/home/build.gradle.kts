@@ -2,6 +2,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
@@ -32,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -42,10 +47,9 @@ dependencies {
     implementation(project(":core:designSystem"))
 
     implementation(libs.coreKtx)
-    implementation(platform(libs.kotlinBom))
     implementation(libs.lifecycleRuntimeKtx)
     implementation(libs.viewModelCompose)
-    implementation(libs.activityCompose)
+    implementation(libs.viewModel)
     implementation(libs.composeBom)
     implementation(libs.ui)
     implementation(libs.navigation)
@@ -55,5 +59,5 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.kotlinx.coroutines.android)
-
+    kapt(libs.hilt.compiler)
 }

@@ -1,6 +1,7 @@
 package alireza.nezami.movieapp.navigation
 
 import alireza.nezami.home.navigation.moviesNavigationRoute
+import alireza.nezami.home.presentation.movieList.MoviesScreen
 import alireza.nezami.movieapp.ui.AppState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,7 +31,9 @@ fun AppNavHost(
         composable(
             route = moviesNavigationRoute,
         ) {
-//        MoviesScreen(onMovieClick)
+            MoviesScreen() {
+
+            }
         }
 //        moviesScreen(onMovieClick = {})
 

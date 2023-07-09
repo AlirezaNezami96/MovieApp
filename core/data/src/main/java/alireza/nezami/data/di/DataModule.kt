@@ -10,8 +10,8 @@ import alireza.nezami.data.repository.SearchRepository
 import alireza.nezami.data.repository.SearchRepositoryImpl
 import alireza.nezami.data.util.ConnectivityManagerNetworkMonitor
 import alireza.nezami.data.util.NetworkMonitor
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
@@ -21,56 +21,60 @@ import dagger.hilt.components.SingletonComponent
  */
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
+object DataModule {
 
     /**
-     * Binds the [OfflineFirstGenreRepository] implementation to the [GenreRepository] interface.
+     * Provides the [GenreRepository] implementation by using the [OfflineFirstGenreRepository].
      *
      * @param repository The [OfflineFirstGenreRepository] instance.
      * @return The [GenreRepository] implementation.
      */
-    @Binds
-    fun bindsGenreRepository(
-        repository: OfflineFirstGenreRepository,
-    ): GenreRepository
+    @Provides
+    fun provideGenreRepository(repository: OfflineFirstGenreRepository): GenreRepository {
+        return repository
+    }
 
     /**
-     * Binds the [MovieRepositoryImpl] implementation to the [MovieRepository] interface.
+     * Provides the [MovieRepository] implementation by using the [MovieRepositoryImpl].
      *
      * @param repository The [MovieRepositoryImpl] instance.
      * @return The [MovieRepository] implementation.
      */
-    @Binds
-    fun bindsMovieRepository(
-        repository: MovieRepositoryImpl,
-    ): MovieRepository
+    @Provides
+    fun provideMovieRepository(repository: MovieRepositoryImpl): MovieRepository {
+        return repository
+    }
 
     /**
-     * Binds the [SearchRepositoryImpl] implementation to the [SearchRepository] interface.
+     * Provides the [SearchRepository] implementation by using the [SearchRepositoryImpl].
      *
      * @param repository The [SearchRepositoryImpl] instance.
      * @return The [SearchRepository] implementation.
      */
-    @Binds
-    fun bindsSearchRepository(
-        repository: SearchRepositoryImpl,
-    ): SearchRepository
+    @Provides
+    fun provideSearchRepository(repository: SearchRepositoryImpl): SearchRepository {
+        return repository
+    }
 
     /**
-     * Binds the [OfflineFavoriteRepository] implementation to the [FavoritesRepository] interface.
+     * Provides the [FavoritesRepository] implementation by using the [OfflineFavoriteRepository].
      *
      * @param repository The [OfflineFavoriteRepository] instance.
      * @return The [FavoritesRepository] implementation.
      */
-    @Binds
-    fun bindsSearchRepository(
-        repository: OfflineFavoriteRepository,
-    ): FavoritesRepository
+    @Provides
+    fun provideFavoriteRepository(repository: OfflineFavoriteRepository): FavoritesRepository {
+        return repository
+    }
 
-
-    @Binds
-    fun bindsNetworkMonitor(
-        networkMonitor: ConnectivityManagerNetworkMonitor,
-    ): NetworkMonitor
-
+    /**
+     * Provides the [NetworkMonitor] implementation by using the [ConnectivityManagerNetworkMonitor].
+     *
+     * @param networkMonitor The [ConnectivityManagerNetworkMonitor] instance.
+     * @return The [NetworkMonitor] implementation.
+     */
+    @Provides
+    fun provideNetworkMonitor(networkMonitor: ConnectivityManagerNetworkMonitor): NetworkMonitor {
+        return networkMonitor
+    }
 }

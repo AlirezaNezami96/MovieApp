@@ -8,12 +8,15 @@ import alireza.nezami.home.presentation.movieList.contract.MoviesEvent
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
 import alireza.nezami.home.presentation.movieList.contract.MoviesUiState
 import androidx.lifecycle.SavedStateHandle
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@HiltViewModel
 class MoviesViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     moviesUiState: MoviesUiState,
