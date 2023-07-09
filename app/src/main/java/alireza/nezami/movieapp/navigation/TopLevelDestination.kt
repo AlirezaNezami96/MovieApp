@@ -1,6 +1,6 @@
 package alireza.nezami.movieapp.navigation
 
-import alireza.nezami.ui.R
+import alireza.nezami.designsystem.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Home

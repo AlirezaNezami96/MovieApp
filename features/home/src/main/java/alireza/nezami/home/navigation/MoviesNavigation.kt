@@ -11,11 +11,11 @@ const val moviesNavigationRoute = "movies_route"
 fun NavController.navigateToMovies(navOptions: NavOptions? = null) {
     this.navigate(moviesNavigationRoute, navOptions)
 }
-
-fun NavGraphBuilder.moviesScreen(onMovieClick: (Int) -> Unit) {
-    composable(
-        route = moviesNavigationRoute,
-    ) {
-        MoviesScreen(onMovieClick)
-    }
-}
+//
+//fun NavGraphBuilder.moviesScreen(onMovieClick: (Int) -> Unit) {
+//    composable(
+//        route = moviesNavigationRoute,
+//    ) {
+////        MoviesScreen(onMovieClick)
+//    }
+//}

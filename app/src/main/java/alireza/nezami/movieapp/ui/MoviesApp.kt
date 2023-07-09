@@ -6,7 +6,7 @@ import alireza.nezami.designsystem.component.NavigationBarItem
 import alireza.nezami.designsystem.component.TopAppBar
 import alireza.nezami.movieapp.navigation.AppNavHost
 import alireza.nezami.movieapp.navigation.TopLevelDestination
-import alireza.nezami.ui.R
+import alireza.nezami.designsystem.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row

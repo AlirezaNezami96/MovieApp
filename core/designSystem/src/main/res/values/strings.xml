@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="not_connected">⚠️ You aren’t connected to the internet</string>
+    <string name="movie_result_was_empty">we are sorry, we can not find the movie :(</string>
+    <string name="find_movies_by_title">"Find your movie by Type title, categories, years, etc "</string>
+    <string name="there_is_no_movies_yet">There is no movie yet!</string>
+</resources>
