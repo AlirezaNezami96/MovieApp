@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.activityCompose)
     implementation(libs.composeBom)
     implementation(libs.ui)
+    implementation(libs.navigation)
     implementation(libs.uiGraphics)
     implementation(libs.toolingPreview)
     implementation(libs.material3)

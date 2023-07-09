@@ -17,6 +17,7 @@ retrofit = "2.9.0"
 kotlinxCoroutines = "1.6.4"
 hilt = "2.46.1"
 androidxHiltNavigationCompose = "1.0.0"
+navigationCompose = "2.6.0"
 okhttp = "4.10.0"
 roomVersion = "2.5.2"
 coil = "2.2.2"
@@ -33,6 +34,7 @@ viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", 
 lifecycleRunTimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRunTimeKtx" }
 activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "composeVersion" }
+navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 uiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "composeVersion" }
 kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinBomVersion" }
