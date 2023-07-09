@@ -53,10 +53,12 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":core:data"))
     implementation(project(":core:ui"))
+    implementation(project(":core:designSystem"))
 
     implementation(libs.coreKtx)
     implementation(platform(libs.kotlinBom))
     implementation(libs.lifecycleRuntimeKtx)
+    implementation(libs.viewModelCompose)
     implementation(libs.activityCompose)
     implementation(libs.composeBom)
     implementation(libs.ui)
@@ -65,6 +67,7 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.kotlinx.coroutines.android)
 
 
 }

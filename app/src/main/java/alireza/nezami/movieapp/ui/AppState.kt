@@ -40,11 +40,11 @@ fun rememberAppState(
 
 @Stable
 class AppState(
-    private val navController: NavHostController,
+    val navController: NavHostController,
     coroutineScope: CoroutineScope,
     networkMonitor: NetworkMonitor,
 ) {
-    private val currentDestination: NavDestination?
+    val currentDestination: NavDestination?
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
