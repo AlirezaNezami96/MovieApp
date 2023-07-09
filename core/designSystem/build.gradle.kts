@@ -38,6 +38,7 @@ dependencies {
 
     api(libs.material3)
     api(libs.androidx.compose.runtime)
+    api(libs.material3)
     api(libs.toolingPreview)
     implementation(libs.coreKtx)
     implementation(libs.coil.kt.compose)
