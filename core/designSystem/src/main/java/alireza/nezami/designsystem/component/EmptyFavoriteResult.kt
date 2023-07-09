@@ -4,7 +4,6 @@ import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.theme.MovieAppTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EmptySearchResult(
+fun EmptyFavoriteResult(
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -33,12 +32,12 @@ fun EmptySearchResult(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_search_no_results),
-                contentDescription = "Empty Search Result"
+                painter = painterResource(R.drawable.ic_favorite_no_result),
+                contentDescription = "Empty Favorite Result"
             )
             HeightSpacer(16)
             Text(
-                text = stringResource(R.string.movie_result_was_empty),
+                text = stringResource(R.string.there_is_no_movies_yet),
                 style = MaterialTheme.typography.titleLarge.copy(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
@@ -64,8 +63,8 @@ fun EmptySearchResult(
 
 @Preview
 @Composable
-fun EmptySearchResultPreview() {
+fun EmptyFavoriteResultPreview() {
     MovieAppTheme {
-        EmptySearchResult()
+        EmptyFavoriteResult()
     }
 }
