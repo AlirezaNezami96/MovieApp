@@ -1,13 +1,14 @@
 package alireza.nezami.movieapp
 
 import alireza.nezami.data.util.NetworkMonitor
-import alireza.nezami.designsystem.theme.AppTheme
-import alireza.nezami.movieapp.ui.MoviesApp
+import alireza.nezami.movieapp.ui.theme.MovieAppTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @Inject
@@ -16,10 +17,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
-                MoviesApp(
-                    networkMonitor = networkMonitor
-                )
+            MovieAppTheme {
+//                MoviesApp(
+//                    networkMonitor = networkMonitor
+//                )
             }
         }
     }
