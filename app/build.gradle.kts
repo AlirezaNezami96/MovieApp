@@ -52,7 +52,6 @@ android {
 dependencies {
     implementation(project(":features:home"))
     implementation(project(":core:data"))
-    implementation(project(":core:ui"))
     implementation(project(":core:designSystem"))
 
     implementation(libs.coreKtx)

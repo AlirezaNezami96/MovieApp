@@ -1,15 +1,5 @@
-package alireza.nezami.movieapp.ui.theme
+package alireza.nezami.designsystem.theme
 
-import alireza.nezami.designsystem.theme.AppTypography
-import alireza.nezami.designsystem.theme.BackgroundTheme
-import alireza.nezami.designsystem.theme.Blue70
-import alireza.nezami.designsystem.theme.DarkBlue60
-import alireza.nezami.designsystem.theme.DarkPurple90
-import alireza.nezami.designsystem.theme.LocalBackgroundTheme
-import alireza.nezami.designsystem.theme.LocalTintTheme
-import alireza.nezami.designsystem.theme.Orange80
-import alireza.nezami.designsystem.theme.TintTheme
-import alireza.nezami.designsystem.theme.White70
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme

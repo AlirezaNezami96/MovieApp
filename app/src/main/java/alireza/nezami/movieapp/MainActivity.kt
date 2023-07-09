@@ -1,7 +1,7 @@
 package alireza.nezami.movieapp
 
 import alireza.nezami.data.util.NetworkMonitor
-import alireza.nezami.movieapp.ui.theme.MovieAppTheme
+import alireza.nezami.designsystem.theme.MovieAppTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
