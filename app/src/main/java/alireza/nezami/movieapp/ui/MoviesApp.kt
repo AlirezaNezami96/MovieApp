@@ -1,23 +1,28 @@
 package alireza.nezami.movieapp.ui
 
 import alireza.nezami.data.util.NetworkMonitor
-import alireza.nezami.designsystem.component.NavigationBar
+import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.component.NavigationBarItem
 import alireza.nezami.designsystem.component.TopAppBar
 import alireza.nezami.movieapp.navigation.AppNavHost
 import alireza.nezami.movieapp.navigation.TopLevelDestination
-import alireza.nezami.designsystem.R
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,11 +40,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import timber.log.Timber
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -78,11 +85,12 @@ fun MoviesApp(
             bottomBar = {
                 val destination = appState.currentTopLevelDestination
                 if (destination != null) {
+
                     BottomBar(
                         destinations = appState.topLevelDestinations,
                         onNavigateToDestination = appState::navigateToTopLevelDestination,
                         currentDestination = appState.currentDestination,
-                        modifier = Modifier.testTag("BottomBar"),
+                        modifier = Modifier,
                     )
                 }
             },
@@ -96,9 +104,13 @@ fun MoviesApp(
                         WindowInsets.safeDrawing.only(
                             WindowInsetsSides.Horizontal,
                         ),
-                    ),
+                    )
             ) {
-                Column(Modifier.fillMaxSize()) {
+                Timber.i("Main scaffold padding: $padding")
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                ) {
                     // Show the top app bar on top level destinations.
                     val destination = appState.currentTopLevelDestination
                     if (destination != null) {
@@ -118,7 +130,6 @@ fun MoviesApp(
                         ) == ActionPerformed
                     })
                 }
-
             }
         }
     }
@@ -131,25 +142,56 @@ private fun BottomBar(
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
 ) {
-    NavigationBar(
-        modifier = modifier,
-    ) {
-        destinations.forEach { destination ->
-            val selected = currentDestination.isTopLevelDestinationInHierarchy(destination)
-            NavigationBarItem(
-                selected = selected,
-                onClick = { onNavigateToDestination(destination) },
-                icon = {
-                    Icon(
-                        imageVector = destination.selectedIcon,
-                        contentDescription = null,
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Divider(
+            thickness = 1.dp,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.fillMaxWidth()
+                .padding(bottom = 2.dp)
+        )
+
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 16.dp,
+                        topEnd = 16.dp
                     )
-                },
-                label = { Text(stringResource(destination.iconTextId)) },
-                modifier = Modifier,
-            )
+                )
+                .heightIn(max = 84.dp),
+        ) {
+            destinations.forEach { destination ->
+                val selected = currentDestination.isTopLevelDestinationInHierarchy(destination)
+                NavigationBarItem(
+                    selected = selected,
+                    onClick = { onNavigateToDestination(destination) },
+                    icon = {
+                        Icon(
+                            imageVector = destination.selectedIcon,
+                            contentDescription = null,
+                            modifier = Modifier,
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    },
+                    label = {
+                        Text(
+                            stringResource(destination.iconTextId),
+                            style = MaterialTheme.typography.labelMedium.copy(
+                                color = if (selected) MaterialTheme.colorScheme.primary
+                                else MaterialTheme.colorScheme.onBackground
+                            )
+                        )
+                    },
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(top = 8.dp)
+                        .fillMaxHeight(),
+                )
+            }
         }
     }
+
 }
 
 private fun NavDestination?.isTopLevelDestinationInHierarchy(destination: TopLevelDestination) =

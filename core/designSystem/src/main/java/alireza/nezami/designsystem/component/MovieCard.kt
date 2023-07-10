@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MovieCard(
+    modifier: Modifier = Modifier,
     position: Int,
     movieTitle: String,
     moviePosterUrl: String,
@@ -51,7 +52,7 @@ fun MovieCard(
         )
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp)
             .fillMaxWidth(),
         shape = MaterialTheme.shapes.large,

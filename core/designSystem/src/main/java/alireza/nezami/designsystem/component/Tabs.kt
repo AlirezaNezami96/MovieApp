@@ -69,8 +69,9 @@ fun TabRow(
     modifier: Modifier = Modifier,
     tabs: @Composable () -> Unit,
 ) {
-    TabRow(
+    ScrollableTabRow(
         selectedTabIndex = selectedTabIndex,
+        edgePadding = 0.dp,
         modifier = modifier,
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onSurface,
@@ -78,7 +79,7 @@ fun TabRow(
             TabRowDefaults.Indicator(
                 modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
                 height = 2.dp,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.primary,
             )
         },
         tabs = tabs,
