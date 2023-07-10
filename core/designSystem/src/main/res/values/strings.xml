@@ -12,4 +12,6 @@
     <string name="upcoming">Upcoming</string>
     <string name="top_rated">Top Rated</string>
     <string name="popular">Popular</string>
+    <string name="nothing_left_to_show">There is nothing to show!</string>
+    <string name="there_was_an_error">There was an error!</string>
 </resources>
