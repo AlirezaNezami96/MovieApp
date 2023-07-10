@@ -1,12 +1,14 @@
 package alireza.nezami.movieapp.navigation
 
 import alireza.nezami.home.navigation.moviesNavigationRoute
-import alireza.nezami.home.presentation.movieList.MoviesScreen
+import alireza.nezami.home.navigation.moviesScreen
 import alireza.nezami.movieapp.ui.AppState
+import alireza.nezami.search.navigation.navigateToSearch
+import alireza.nezami.search.navigation.searchNavigationRoute
+import alireza.nezami.search.navigation.searchScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 
 /**
  * Top-level navigation graph.
@@ -27,15 +29,16 @@ fun AppNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        //todo: handle onMovieClick
-        composable(
-            route = moviesNavigationRoute,
-        ) {
-            MoviesScreen() {
-
+        moviesScreen(
+            onMovieClick = {},
+            onSearchClick = {
+                navController.navigateToSearch()
             }
-        }
-//        moviesScreen(onMovieClick = {})
+        )
+
+        searchScreen(
+            onMovieClick = {}
+        )
 
         //todo: add more routes
     }

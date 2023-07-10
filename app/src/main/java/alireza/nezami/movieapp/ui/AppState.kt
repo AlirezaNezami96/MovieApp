@@ -4,6 +4,7 @@ import alireza.nezami.data.util.NetworkMonitor
 import alireza.nezami.home.navigation.moviesNavigationRoute
 import alireza.nezami.home.navigation.navigateToMovies
 import alireza.nezami.movieapp.navigation.TopLevelDestination
+import alireza.nezami.search.navigation.navigateToSearch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
@@ -94,12 +95,8 @@ class AppState(
 
         when (topLevelDestination) {
             TopLevelDestination.HOME -> navController.navigateToMovies(topLevelNavOptions)
-            TopLevelDestination.SEARCH -> TODO()
+            TopLevelDestination.SEARCH -> navController.navigateToSearch(topLevelNavOptions)
             TopLevelDestination.FAVORITE -> TODO()
         }
-    }
-
-    fun navigateToSearch() {
-        //todo: after adding search feature: navController.navigateToSearch()
     }
 }
