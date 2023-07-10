@@ -52,26 +52,6 @@ fun RowScope.NavigationBarItem(
 }
 
 /**
- * Navigation bar with content slot. Wraps Material 3 [NavigationBar].
- *
- * @param modifier Modifier to be applied to the navigation bar.
- * @param content Destinations inside the navigation bar. This should contain multiple
- * [NavigationBarItem]s.
- */
-@Composable
-fun NavigationBar(
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    NavigationBar(
-        modifier = modifier,
-        contentColor = NavigationDefaults.navigationContentColor(),
-        tonalElevation = 0.dp,
-        content = content,
-    )
-}
-
-/**
  * Navigation default values.
  */
 object NavigationDefaults {

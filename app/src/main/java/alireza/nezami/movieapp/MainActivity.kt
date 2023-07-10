@@ -7,7 +7,9 @@ import alireza.nezami.movieapp.ui.MoviesApp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var networkMonitor: NetworkMonitor
