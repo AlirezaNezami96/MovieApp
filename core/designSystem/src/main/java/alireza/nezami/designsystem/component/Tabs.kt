@@ -39,7 +39,7 @@ fun Tab(
         modifier = modifier,
         enabled = enabled,
         text = {
-            val style = MaterialTheme.typography.labelMedium.copy(
+            val style = MaterialTheme.typography.labelLarge.copy(
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground
             )
