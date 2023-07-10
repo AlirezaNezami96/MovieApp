@@ -1,5 +1,6 @@
 package alireza.nezami.designsystem.component
 
+import alireza.nezami.common.extensions.formatWithCommas
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.theme.MovieAppTheme
 import androidx.compose.foundation.background
@@ -34,10 +35,10 @@ fun SearchMovieCard(
     position: Int,
     movieTitle: String,
     moviePosterUrl: String,
-    movieRating: Float,
+    movieRating: Double,
     movieGenres: List<String>,
     releaseDate: String,
-    duration: String
+    voteCount: Int
 ) {
     val isOddPosition = position % 2 != 0
     val gradientColors =
@@ -52,7 +53,7 @@ fun SearchMovieCard(
 
     Card(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(bottom = 8.dp)
             .fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors()
@@ -60,14 +61,14 @@ fun SearchMovieCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp)
+                .height(180.dp)
                 .background(brush = Brush.horizontalGradient(gradientColors))
-                .padding(all = 16.dp)
+                .padding(all = 8.dp)
         ) {
             DynamicAsyncImage(
                 contentDescription = "Movie Poster",
                 modifier = Modifier
-                    .height(250.dp)
+                    .height(180.dp)
                     .aspectRatio(0.8f)
                     .clip(shape = MaterialTheme.shapes.medium),
                 imageUrl = moviePosterUrl
@@ -81,8 +82,8 @@ fun SearchMovieCard(
 
                 Text(
                     text = movieTitle,
-                    style = MaterialTheme.typography.headlineSmall.copy(
-                        color = Color.White,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.Bold
                     ),
                     modifier = Modifier
@@ -163,13 +164,13 @@ fun SearchMovieCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_duration),
-                        contentDescription = "Duration Icon",
+                        painter = painterResource(id = R.drawable.ic_user),
+                        contentDescription = "User Icon",
                         tint = Color.White,
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = duration,
+                        text = voteCount.formatWithCommas(),
                         style = MaterialTheme.typography.titleSmall.copy(
                             color = MaterialTheme.colorScheme.onSurface
                         ),
@@ -191,10 +192,10 @@ fun SearchMovieCardPreview() {
             position = 0,
             movieTitle = "Spiderman, Far Far Far from Home and No Way Home",
             moviePosterUrl = "https://image.tmdb.org/t/p/original/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
-            movieRating = 3.7f,
+            movieRating = 3.7,
             movieGenres = listOf("Action", "Drama, Action", "Drama"),
             releaseDate = "2019",
-            duration = "134 Minutes"
+            voteCount = 12
         )
     }
 }
@@ -208,10 +209,10 @@ fun SearchMovieCardPreview2() {
             position = 1,
             movieTitle = "Spiderman",
             moviePosterUrl = "https://image.tmdb.org/t/p/original/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
-            movieRating = 3.7f,
+            movieRating = 3.7,
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
-            duration = "134 Minutes"
+            voteCount = 134
         )
     }
 }
