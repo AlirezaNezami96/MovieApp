@@ -7,6 +7,8 @@ import alireza.nezami.domain.usecase.GetPopularMoviesUseCase
 import alireza.nezami.home.presentation.movieList.contract.MoviesEvent
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
 import alireza.nezami.home.presentation.movieList.contract.MoviesUiState
+import alireza.nezami.model.movie.ListState
+import alireza.nezami.model.movie.Movie
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +30,7 @@ class MoviesViewModel @Inject constructor(
 ) {
 
     init {
-        acceptIntent(MoviesIntent.GetPopular(1))
+        acceptIntent(MoviesIntent.GetPopular(uiState.value.popularMoviePage.page))
     }
 
     override fun mapIntents(intent: MoviesIntent): Flow<MoviesUiState.PartialState> =
@@ -51,7 +53,15 @@ class MoviesViewModel @Inject constructor(
             is MoviesUiState.PartialState.AddPopularMovies -> previousState.copy(
                 isLoading = false,
                 isError = false,
-                popularMovies = partialState.topRatedMovies
+                popularMoviePage = previousState.popularMoviePage.copy(
+                    page = partialState.moviePagingData.page,
+                    state = ListState.IDLE
+                ),
+                popularMovies = addMoviesToList(
+                    previousState.popularMovies,
+                    partialState.moviePagingData.results
+                )
+
             )
 
             is MoviesUiState.PartialState.AddTopRatedMovies -> TODO()
@@ -72,9 +82,16 @@ class MoviesViewModel @Inject constructor(
             )
         }
 
+    private fun addMoviesToList(previousList: List<Movie>, newList: List<Movie>): List<Movie> {
+        val finalList = previousList.toMutableList().apply {
+                addAll(newList)
+        }
+        return finalList
+    }
+
 
     private fun getPopularMovies(page: Int?): Flow<MoviesUiState.PartialState> = flow {
-        getPopularMoviesUseCase(page)
+        getPopularMoviesUseCase(page ?: uiState.value.popularMoviePage.page.plus(1))
             .asResult()
             .map {
                 when (it) {
@@ -88,6 +105,5 @@ class MoviesViewModel @Inject constructor(
             }
             .collect()
     }
-
 
 }
