@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation(project(":features:home"))
+    implementation(project(":features:search"))
     implementation(project(":core:data"))
     implementation(project(":core:designSystem"))
 
