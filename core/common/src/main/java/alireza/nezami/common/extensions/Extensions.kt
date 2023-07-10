@@ -26,3 +26,12 @@ fun Double?.orZero(): Double {
 fun Boolean?.orFalse(): Boolean {
     return this ?: false
 }
+
+/**
+ * Returns this [List<T>] value if it is not null, or empty list if it is null.
+ *
+ * @return The non-null [List<T>] value or empty list.
+ */
+fun <T> List<T>?.orEmptyList(): List<T> {
+    return this ?: emptyList()
+}
