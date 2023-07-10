@@ -66,7 +66,7 @@ class MoviesViewModel @Inject constructor(
 
             is MoviesIntent.OnMovieClick -> TODO()
             MoviesIntent.OnSearchClick -> {
-                publishEvent(MoviesEvent.NavigateTo(""))
+                publishEvent(MoviesEvent.NavigateToSearch)
                 emptyFlow()
             }
         }
