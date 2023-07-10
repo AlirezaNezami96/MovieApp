@@ -1,5 +1,6 @@
 package alireza.nezami.designsystem.component
 
+import alireza.nezami.common.extensions.formatWithCommas
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.theme.MovieAppTheme
 import androidx.compose.foundation.background
@@ -181,7 +182,7 @@ fun MovieCard(
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = voteCount.toString(),
+                        text = voteCount.formatWithCommas(),
                         style = MaterialTheme.typography.bodySmall.copy(
                             color = MaterialTheme.colorScheme.onSurface
                         ),

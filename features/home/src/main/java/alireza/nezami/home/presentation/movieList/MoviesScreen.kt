@@ -6,6 +6,8 @@ import alireza.nezami.designsystem.component.MovieCard
 import alireza.nezami.designsystem.component.SearchInput
 import alireza.nezami.designsystem.component.Tab
 import alireza.nezami.designsystem.component.TabRow
+import alireza.nezami.designsystem.extensions.collectWithLifecycle
+import alireza.nezami.home.presentation.movieList.contract.MoviesEvent
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
 import alireza.nezami.home.presentation.movieList.contract.MoviesTabState
 import alireza.nezami.home.presentation.movieList.contract.MoviesUiState
@@ -36,19 +38,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun MoviesScreen(
     viewModel: MoviesViewModel = hiltViewModel(),
-    onMovieClick: (Int) -> Unit
+    onMovieClick: (Int) -> Unit,
+    onSearchClick: () -> Unit,
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
+
+    HandleEvents(
+        events = viewModel.event,
+        navigateToMovieDetail = onMovieClick,
+        NavigateToSearch = onSearchClick
+    )
+
     MoviesContent(
         uiState = uiState,
         onIntent = viewModel::acceptIntent
@@ -208,9 +220,13 @@ fun PaginationErrorText(text: String) {
 
 @Composable
 fun SearchContent(onIntent: (MoviesIntent) -> Unit) {
-    SearchInput(onParentClick = {
-        onIntent.invoke(MoviesIntent.OnSearchClick)
-    })
+    val focusRequester = remember { FocusRequester() }
+
+    SearchInput(
+        focusRequester = focusRequester,
+        onParentClick = {
+            onIntent.invoke(MoviesIntent.OnSearchClick)
+        })
 }
 
 @Composable
@@ -232,6 +248,20 @@ private fun TabContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit)
                     Text(text = stringResource(title))
                 },
             )
+        }
+    }
+}
+
+@Composable
+private fun HandleEvents(
+    events: Flow<MoviesEvent>,
+    navigateToMovieDetail: (Int) -> Unit,
+    NavigateToSearch: () -> Unit
+) {
+    events.collectWithLifecycle {
+        when (it) {
+            MoviesEvent.NavigateToSearch -> NavigateToSearch()
+            is MoviesEvent.NavigateToMovieDetail -> navigateToMovieDetail(it.id)
         }
     }
 }

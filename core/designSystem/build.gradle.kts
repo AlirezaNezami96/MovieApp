@@ -39,7 +39,9 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(project(":core:common"))
 
+    implementation(libs.lifecycleRuntimeKtx)
     api(libs.material3)
     api(libs.androidx.compose.runtime)
     api(libs.material3)

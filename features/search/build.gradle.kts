@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "alireza.nezami.home"
+    namespace = "alireza.nezami.search"
     compileSdk = 33
 
     defaultConfig {
@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+
     implementation(project(":core:model"))
     implementation(project(":core:domain"))
     implementation(project(":core:common"))

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -31,9 +32,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,12 +47,13 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchInput(
     modifier: Modifier = Modifier,
+    text: String = "",
     isLoading: Boolean = false,
     enabled: Boolean = false,
+    focusRequester: FocusRequester,
     onValueChange: (String) -> Unit = {},
     onParentClick: () -> Unit = {},
 ) {
-    val (text, setText) = remember { mutableStateOf("") }
     val (isFocused, setFocused) = remember { mutableStateOf(false) }
 
     Row(
@@ -72,8 +78,8 @@ fun SearchInput(
                 .weight(1f)
                 .align(Alignment.CenterVertically),
             text = text,
+            focusRequester = focusRequester,
             onValueChange = {
-                setText(it)
                 onValueChange(it)
             },
             onFocusChanged = { isFocused ->
@@ -96,7 +102,7 @@ fun SearchInput(
                     .padding(horizontal = 10.dp)
                     .size(24.dp)
             ) {
-                setText("")
+                onValueChange("")
             }
         }
 
@@ -115,18 +121,25 @@ fun SearchInput(
 fun TextInput(
     modifier: Modifier = Modifier,
     text: String,
+    focusRequester: FocusRequester,
     onValueChange: (String) -> Unit,
     onFocusChanged: (isFocused: Boolean) -> Unit,
     enabled: Boolean
 ) {
+    val focusManager = LocalFocusManager.current
     TextField(
         value = text,
         enabled = enabled,
         onValueChange = onValueChange,
         modifier = modifier
+            .focusRequester(focusRequester)
             .onFocusChanged { onFocusChanged(it.isFocused) },
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Search
+        ),
+        keyboardActions = KeyboardActions(
+            onSearch = { focusManager.clearFocus()},
         ),
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
@@ -137,8 +150,14 @@ fun TextInput(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-
+            focusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(
+                alpha = 0.5f
             ),
+            unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface.copy(
+                alpha = 0.5f
+            )
+
+        ),
         singleLine = true,
         placeholder = {
             Text(
@@ -168,7 +187,6 @@ fun CloseIcon(
     IconButton(
         onClick = onClick,
         modifier = modifier
-            .padding(10.dp)
     ) {
         Icon(
             imageVector = Icons.Default.Close,
@@ -199,7 +217,14 @@ fun AnimatedFadeVisibility(
 @Preview
 @Composable
 fun SearchInputPreview() {
+    val focusRequester = remember { FocusRequester() }
+
     MovieAppTheme {
-        SearchInput(isLoading = false, onValueChange = {})
+        SearchInput(
+            text = "",
+            isLoading = false,
+            onValueChange = {},
+            focusRequester = focusRequester
+        )
     }
 }

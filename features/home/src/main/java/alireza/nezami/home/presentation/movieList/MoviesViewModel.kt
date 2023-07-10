@@ -66,7 +66,7 @@ class MoviesViewModel @Inject constructor(
 
             is MoviesIntent.OnMovieClick -> TODO()
             MoviesIntent.OnSearchClick -> {
-                publishEvent(MoviesEvent.NavigateTo(""))
+                publishEvent(MoviesEvent.NavigateToSearch)
                 emptyFlow()
             }
         }
@@ -123,7 +123,8 @@ class MoviesViewModel @Inject constructor(
 
             is MoviesUiState.PartialState.PopularLoading -> previousState.copy(
                 popularMovieState = previousState.popularMovieState.copy(
-                    state = ListState.LOADING
+                    state = if (previousState.popularMovies.isEmpty()) ListState.LOADING
+                    else ListState.PAGINATING
                 )
             )
 
@@ -147,7 +148,8 @@ class MoviesViewModel @Inject constructor(
 
             is MoviesUiState.PartialState.NowPlayingLoading -> previousState.copy(
                 popularMovieState = previousState.nowPlayingMovieState.copy(
-                    state = ListState.LOADING
+                    state = if (previousState.nowPlayingMovies.isEmpty()) ListState.LOADING
+                    else ListState.PAGINATING
                 )
             )
 
@@ -160,7 +162,8 @@ class MoviesViewModel @Inject constructor(
 
             is MoviesUiState.PartialState.TopRateLoading -> previousState.copy(
                 popularMovieState = previousState.topRatedMovieState.copy(
-                    state = ListState.LOADING
+                    state = if (previousState.topRatedMovies.isEmpty()) ListState.LOADING
+                    else ListState.PAGINATING
                 )
             )
 
@@ -173,7 +176,8 @@ class MoviesViewModel @Inject constructor(
 
             is MoviesUiState.PartialState.UpcomingLoading -> previousState.copy(
                 popularMovieState = previousState.upcomingMovieState.copy(
-                    state = ListState.LOADING
+                    state = if (previousState.upcomingMovies.isEmpty()) ListState.LOADING
+                    else ListState.PAGINATING
                 )
             )
         }

@@ -19,4 +19,5 @@ enum class ListState {
     PAGINATING,
     ERROR,
     PAGINATION_EXHAUST,
+    EMPTY
 }
