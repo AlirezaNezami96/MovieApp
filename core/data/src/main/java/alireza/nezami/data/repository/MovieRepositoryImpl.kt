@@ -65,10 +65,10 @@ private fun mapGenreNames(
     genres: List<GenreEntity>
 ): GetMovieResponseDto {
     val updatedResults = movies.results?.map { movieResult ->
-        val genreNames = movieResult?.genreIds?.map { genreId ->
+        val genreNames = movieResult.genreIds?.map { genreId ->
             genres.find { it.id == genreId }?.name.orEmpty()
         } ?: emptyList()
-        movieResult?.genreNames = genreNames
+        movieResult.genreNames = genreNames
         movieResult
     }
     return movies.copy(results = updatedResults)

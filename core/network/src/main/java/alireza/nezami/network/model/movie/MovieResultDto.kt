@@ -3,6 +3,7 @@ package alireza.nezami.network.model.movie
 
 import alireza.nezami.common.extensions.orFalse
 import alireza.nezami.common.extensions.orZero
+import alireza.nezami.common.utils.DateUtils
 import alireza.nezami.model.movie.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -51,7 +52,7 @@ fun MovieResultDto?.asExternalModel(): Movie {
         overview = this?.overview.orEmpty(),
         popularity = this?.popularity.orZero(),
         posterPath = "https://image.tmdb.org/t/p/original/${this?.posterPath.orEmpty()}",
-        releaseDate = this?.releaseDate.orEmpty(),
+        releaseDate = DateUtils.getYearFromDate(this?.releaseDate.orEmpty()),
         title = this?.title.orEmpty(),
         video = this?.video.orFalse(),
         voteAverage = this?.voteAverage.orZero(),
