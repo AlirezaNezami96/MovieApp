@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
@@ -153,13 +154,7 @@ private fun BottomBar(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 16.dp,
-                        topEnd = 16.dp
-                    )
-                )
-                .heightIn(max = 84.dp),
+                .heightIn(max = 74.dp),
         ) {
             destinations.forEach { destination ->
                 val selected = currentDestination.isTopLevelDestinationInHierarchy(destination)
@@ -170,7 +165,7 @@ private fun BottomBar(
                         Icon(
                             imageVector = destination.selectedIcon,
                             contentDescription = null,
-                            modifier = Modifier,
+                            modifier = Modifier.size(20.dp),
                             tint = MaterialTheme.colorScheme.onBackground
                         )
                     },
@@ -180,12 +175,12 @@ private fun BottomBar(
                             style = MaterialTheme.typography.labelMedium.copy(
                                 color = if (selected) MaterialTheme.colorScheme.primary
                                 else MaterialTheme.colorScheme.onBackground
-                            )
+                            ),
+                            modifier = Modifier.padding(top = 8.dp)
                         )
                     },
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background)
-                        .padding(top = 8.dp)
                         .fillMaxHeight(),
                 )
             }

@@ -35,10 +35,10 @@ fun MovieCard(
     position: Int,
     movieTitle: String,
     moviePosterUrl: String,
-    movieRating: Float,
+    movieRating: Double,
     movieGenres: List<String>,
     releaseDate: String,
-    duration: String
+    voteCount: Int
 ) {
     val isOddPosition = position % 2 != 0
     val gradientColors =
@@ -53,7 +53,11 @@ fun MovieCard(
 
     Card(
         modifier = modifier
-            .padding(8.dp)
+            .padding(
+                start = if (isOddPosition) 4.dp else 0.dp,
+                end = if (!isOddPosition) 4.dp else 0.dp,
+                bottom = 8.dp
+            )
             .fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors()
@@ -62,13 +66,13 @@ fun MovieCard(
             modifier = Modifier
                 .padding(0.dp)
                 .background(brush = Brush.verticalGradient(gradientColors))
-                .padding(all = 16.dp)
+                .padding(all = 8.dp)
         ) {
             Box(modifier = Modifier) {
                 DynamicAsyncImage(
                     contentDescription = "Movie Poster",
                     modifier = Modifier
-                        .height(250.dp)
+                        .height(180.dp)
                         .fillMaxWidth()
                         .clip(shape = MaterialTheme.shapes.medium),
                     imageUrl = moviePosterUrl
@@ -76,15 +80,15 @@ fun MovieCard(
 
                 Row(
                     modifier = Modifier
-                        .padding(8.dp)
-                        .align(Alignment.BottomEnd)
                         .padding(4.dp)
+                        .align(Alignment.BottomEnd)
                         .background(
                             color = MaterialTheme.colorScheme.background.copy(
-                                alpha = 0.5f
+                                alpha = 0.8f
                             ),
                             shape = MaterialTheme.shapes.small
-                        ),
+                        )
+                        .padding(4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
@@ -107,7 +111,7 @@ fun MovieCard(
 
             Text(
                 text = movieTitle,
-                style = MaterialTheme.typography.headlineSmall.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 ),
@@ -130,7 +134,7 @@ fun MovieCard(
                 )
                 Text(
                     text = movieGenres.joinToString(", "),
-                    style = MaterialTheme.typography.titleSmall.copy(
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = MaterialTheme.colorScheme.onSurface,
                     ),
                     modifier = Modifier.padding(start = 4.dp),
@@ -151,7 +155,7 @@ fun MovieCard(
                 )
                 Text(
                     text = releaseDate,
-                    style = MaterialTheme.typography.titleSmall.copy(
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = MaterialTheme.colorScheme.onSurface,
                     ),
                     modifier = Modifier.padding(start = 4.dp),
@@ -165,14 +169,14 @@ fun MovieCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_duration),
+                    painter = painterResource(id = R.drawable.ic_user),
                     contentDescription = "Duration Icon",
                     tint = Color.White,
                     modifier = Modifier.size(16.dp)
                 )
                 Text(
-                    text = duration,
-                    style = MaterialTheme.typography.titleSmall.copy(
+                    text = voteCount.toString(),
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = MaterialTheme.colorScheme.onSurface
                     ),
                     modifier = Modifier.padding(start = 4.dp),
@@ -192,10 +196,10 @@ fun MovieCardPreview() {
             position = 0,
             movieTitle = "Spiderman",
             moviePosterUrl = "https://image.tmdb.org/t/p/original/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
-            movieRating = 3.7f,
+            movieRating = 3.7,
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
-            duration = "134 Minutes"
+            voteCount = 100
         )
     }
 }
@@ -208,10 +212,10 @@ fun MovieCardPreview2() {
             position = 1,
             movieTitle = "Spiderman",
             moviePosterUrl = "https://image.tmdb.org/t/p/original/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
-            movieRating = 3.7f,
+            movieRating = 3.7,
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
-            duration = "134 Minutes"
+            voteCount = 100
         )
     }
 }

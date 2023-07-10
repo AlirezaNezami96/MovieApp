@@ -44,13 +44,13 @@ data class MovieResultDto(
 fun MovieResultDto?.asExternalModel(): Movie {
     return Movie(
         adult = this?.adult.orFalse(),
-        backdropPath = this?.backdropPath.orEmpty(),
+        backdropPath = "https://image.tmdb.org/t/p/original/${this?.backdropPath.orEmpty()}",
         id = this?.id.orZero(),
         originalLanguage = this?.originalLanguage.orEmpty(),
         originalTitle = this?.originalTitle.orEmpty(),
         overview = this?.overview.orEmpty(),
         popularity = this?.popularity.orZero(),
-        posterPath = this?.posterPath.orEmpty(),
+        posterPath = "https://image.tmdb.org/t/p/original/${this?.posterPath.orEmpty()}",
         releaseDate = this?.releaseDate.orEmpty(),
         title = this?.title.orEmpty(),
         video = this?.video.orFalse(),
