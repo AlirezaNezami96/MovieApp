@@ -1,6 +1,7 @@
 package alireza.nezami.network.model.movie
 
 
+import alireza.nezami.common.extensions.formatToOneDecimalPlace
 import alireza.nezami.common.extensions.orFalse
 import alireza.nezami.common.extensions.orZero
 import alireza.nezami.common.utils.DateUtils
@@ -40,7 +41,7 @@ data class MovieResultDto(
     val voteCount: Int? = null,
 
     var genreNames: List<String> = emptyList(),
-    )
+)
 
 fun MovieResultDto?.asExternalModel(): Movie {
     return Movie(
@@ -55,7 +56,7 @@ fun MovieResultDto?.asExternalModel(): Movie {
         releaseDate = DateUtils.getYearFromDate(this?.releaseDate.orEmpty()),
         title = this?.title.orEmpty(),
         video = this?.video.orFalse(),
-        voteAverage = this?.voteAverage.orZero(),
+        voteAverage = this?.voteAverage.formatToOneDecimalPlace().orZero(),
         voteCount = this?.voteCount.orZero()
     )
 }
