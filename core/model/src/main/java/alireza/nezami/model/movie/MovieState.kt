@@ -5,15 +5,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieState(
-    val state: ListState,
-    val page: Int
+    val state: ListState = ListState.LOADING,
+    val page: Int = 1,
+    val errorMessage: String = ""
 ) : Parcelable {
-    companion object {
-        val DEFAULT = MovieState(
-            state = ListState.LOADING,
-            page = 1
-        )
-    }
+    val nextPage: Int
+        get() = page + 1
 }
 
 enum class ListState {

@@ -15,25 +15,32 @@ data class MoviesUiState(
     val popularMovies: List<Movie> = emptyList(),
     val nowPlayingMovies: List<Movie> = emptyList(),
 
-    val topRatedMoviePage: MovieState = MovieState.DEFAULT,
-    val upcomingMoviePage: MovieState = MovieState.DEFAULT,
-    val popularMoviePage: MovieState = MovieState.DEFAULT,
-    val nowPlayingMoviePage: MovieState = MovieState.DEFAULT,
+    val topRatedMovieState: MovieState = MovieState(),
+    val upcomingMovieState: MovieState = MovieState(),
+    val popularMovieState: MovieState = MovieState(),
+    val nowPlayingMovieState: MovieState = MovieState(),
 
     val selectedTabIndex: Int = MoviesTabState.NowPlaying.index,
 
-    val isLoading: Boolean = false,
-    val isError: Boolean = false,
-    val errorMessage: String? = null
-) : Parcelable {
+    ) : Parcelable {
 
     sealed class PartialState {
-        data class AddTopRatedMovies(val topRatedMovies: Movies) : PartialState()
-        data class AddUpcomingMovies(val topRatedMovies: Movies) : PartialState()
-        data class AddPopularMovies(val moviePagingData: Movies) : PartialState()
-        data class AddNowPlayingMovies(val topRatedMovies: Movies) : PartialState()
-        data class ShowErrorDialog(val message: String) : PartialState()
-        data class Loading(val show: Boolean) : PartialState()
+        data class AddTopRatedMovies(val movies: Movies) : PartialState()
+        data class TopRateError(val message: String) : PartialState()
+        data class TopRateLoading(val show: Boolean) : PartialState()
+
+        data class AddUpcomingMovies(val movies: Movies) : PartialState()
+        data class UpcomingError(val message: String) : PartialState()
+        data class UpcomingLoading(val show: Boolean) : PartialState()
+
+        data class AddPopularMovies(val movies: Movies) : PartialState()
+        data class PopularError(val message: String) : PartialState()
+        data class PopularLoading(val show: Boolean) : PartialState()
+
+        data class AddNowPlayingMovies(val movies: Movies) : PartialState()
+        data class NowPlayingError(val message: String) : PartialState()
+        data class NowPlayingLoading(val show: Boolean) : PartialState()
+
         data class ChangeTab(val selectedTabIndex: Int) : PartialState()
 
     }

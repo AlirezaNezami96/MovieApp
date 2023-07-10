@@ -7,6 +7,7 @@ import alireza.nezami.designsystem.component.SearchInput
 import alireza.nezami.designsystem.component.Tab
 import alireza.nezami.designsystem.component.TabRow
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
+import alireza.nezami.home.presentation.movieList.contract.MoviesTabState
 import alireza.nezami.home.presentation.movieList.contract.MoviesUiState
 import alireza.nezami.model.movie.ListState
 import alireza.nezami.model.movie.Movie
@@ -65,9 +66,38 @@ fun MoviesContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit) {
             )
     ) {
         SearchContent(onIntent)
+
         TabContent(uiState, onIntent)
+
         MoviesListContent(
-            listState = uiState.popularMoviePage,
+            shown = uiState.selectedTabIndex == MoviesTabState.NowPlaying.index,
+            listState = uiState.nowPlayingMovieState,
+            list = uiState.nowPlayingMovies,
+            onPaginate = {
+                onIntent.invoke(MoviesIntent.GetNowPlaying())
+            },
+        )
+        MoviesListContent(
+            shown = uiState.selectedTabIndex == MoviesTabState.Upcoming.index,
+            listState = uiState.upcomingMovieState,
+            list = uiState.upcomingMovies,
+            onPaginate = {
+                onIntent.invoke(MoviesIntent.GetUpcoming())
+            },
+        )
+
+        MoviesListContent(
+            shown = uiState.selectedTabIndex == MoviesTabState.TopRated.index,
+            listState = uiState.topRatedMovieState,
+            list = uiState.topRatedMovies,
+            onPaginate = {
+                onIntent.invoke(MoviesIntent.GetTopRated())
+            },
+        )
+
+        MoviesListContent(
+            shown = uiState.selectedTabIndex == MoviesTabState.Popular.index,
+            listState = uiState.popularMovieState,
             list = uiState.popularMovies,
             onPaginate = {
                 onIntent.invoke(MoviesIntent.GetPopular())
@@ -92,58 +122,61 @@ fun LoadingComponent() {
 fun MoviesListContent(
     listState: MovieState,
     list: List<Movie>,
-    onPaginate: () -> Unit
+    onPaginate: () -> Unit,
+    shown: Boolean
 ) {
-    val lazyListThreshold = 6
-    val lazyGridState = rememberLazyGridState()
-    val shouldStartPaginate = remember {
-        derivedStateOf {
-            (lazyGridState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
-                ?: -9) >= (lazyGridState.layoutInfo.totalItemsCount - lazyListThreshold)
-        }
-    }
-
-    LaunchedEffect(key1 = shouldStartPaginate.value) {
-        if (shouldStartPaginate.value && listState.state == ListState.IDLE)
-            onPaginate()
-    }
-
-    LazyVerticalGrid(
-        state = lazyGridState,
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(vertical = 16.dp)
-    ) {
-        itemsIndexed(
-            items = list,
-            key = { _, data -> data.id }
-        ) { index, movie ->
-            MovieCard(
-                position = index,
-                movieTitle = movie.title,
-                moviePosterUrl = movie.posterPath,
-                movieRating = movie.voteAverage,
-                movieGenres = movie.genreNames,
-                releaseDate = movie.releaseDate,
-                voteCount = movie.voteCount
-            )
+    if (shown) {
+        val lazyListThreshold = 6
+        val lazyGridState = rememberLazyGridState()
+        val shouldStartPaginate = remember {
+            derivedStateOf {
+                (lazyGridState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
+                    ?: -9) >= (lazyGridState.layoutInfo.totalItemsCount - lazyListThreshold)
+            }
         }
 
-        item(
-            key = listState,
+        LaunchedEffect(key1 = shouldStartPaginate.value) {
+            if (shouldStartPaginate.value && listState.state == ListState.IDLE)
+                onPaginate()
+        }
+
+        LazyVerticalGrid(
+            state = lazyGridState,
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(vertical = 16.dp)
         ) {
-            when (listState.state) {
-                ListState.LOADING, ListState.PAGINATING -> LoadingComponent()
+            itemsIndexed(
+                items = list,
+                key = { _, data -> data.id }
+            ) { index, movie ->
+                MovieCard(
+                    position = index,
+                    movieTitle = movie.title,
+                    moviePosterUrl = movie.posterPath,
+                    movieRating = movie.voteAverage,
+                    movieGenres = movie.genreNames,
+                    releaseDate = movie.releaseDate,
+                    voteCount = movie.voteCount
+                )
+            }
 
-                ListState.ERROR -> PaginationErrorText(R.string.there_was_an_error)
-                ListState.PAGINATION_EXHAUST -> PaginationErrorText(R.string.nothing_left_to_show)
-                else -> {}
+            item(
+                key = listState,
+            ) {
+                when (listState.state) {
+                    ListState.LOADING, ListState.PAGINATING -> LoadingComponent()
+
+                    ListState.ERROR -> PaginationErrorText(listState.errorMessage)
+                    ListState.PAGINATION_EXHAUST -> PaginationErrorText(stringResource(R.string.nothing_left_to_show))
+                    else -> {}
+                }
             }
         }
     }
 }
 
 @Composable
-fun PaginationErrorText(textResource: Int) {
+fun PaginationErrorText(text: String) {
     Box(
         modifier = Modifier
             .padding(0.dp)
@@ -160,7 +193,7 @@ fun PaginationErrorText(textResource: Int) {
             .padding(horizontal = 10.dp, vertical = 5.dp)
     ) {
         Text(
-            text = stringResource(textResource),
+            text = text,
             style = MaterialTheme.typography.titleMedium.copy(
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium
