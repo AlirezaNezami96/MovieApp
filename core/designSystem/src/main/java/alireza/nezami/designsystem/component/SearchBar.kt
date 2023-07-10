@@ -11,8 +11,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
@@ -53,6 +53,7 @@ fun SearchInput(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .heightIn(max = 56.dp)
             .clickable {
                 if (!enabled) {
                     onParentClick()
@@ -67,7 +68,9 @@ fun SearchInput(
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextInput(
-            enabled = enabled,
+            modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterVertically),
             text = text,
             onValueChange = {
                 setText(it)
@@ -75,13 +78,14 @@ fun SearchInput(
             },
             onFocusChanged = { isFocused ->
                 setFocused(isFocused)
-            }
+            },
+            enabled = enabled
         )
 
         AnimatedFadeVisibility(visible = isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(horizontal = 10.dp)
                     .size(24.dp)
             )
         }
@@ -89,7 +93,7 @@ fun SearchInput(
         AnimatedFadeVisibility(visible = isFocused) {
             CloseIcon(
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(horizontal = 10.dp)
                     .size(24.dp)
             ) {
                 setText("")
@@ -99,7 +103,7 @@ fun SearchInput(
         AnimatedFadeVisibility(visible = !isLoading && !isFocused) {
             SearchIcon(
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(horizontal = 10.dp)
                     .size(24.dp)
             )
         }
@@ -108,7 +112,8 @@ fun SearchInput(
 }
 
 @Composable
-fun RowScope.TextInput(
+fun TextInput(
+    modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
     onFocusChanged: (isFocused: Boolean) -> Unit,
@@ -118,8 +123,7 @@ fun RowScope.TextInput(
         value = text,
         enabled = enabled,
         onValueChange = onValueChange,
-        modifier = Modifier
-            .weight(1f)
+        modifier = modifier
             .onFocusChanged { onFocusChanged(it.isFocused) },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text
@@ -134,7 +138,7 @@ fun RowScope.TextInput(
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
 
-        ),
+            ),
         singleLine = true,
         placeholder = {
             Text(
