@@ -18,6 +18,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -64,7 +65,10 @@ class MoviesViewModel @Inject constructor(
             )
 
             is MoviesIntent.OnMovieClick -> TODO()
-            MoviesIntent.OnSearchClick -> TODO()
+            MoviesIntent.OnSearchClick -> {
+                publishEvent(MoviesEvent.NavigateTo(""))
+                emptyFlow()
+            }
         }
 
     override fun reduceUiState(
