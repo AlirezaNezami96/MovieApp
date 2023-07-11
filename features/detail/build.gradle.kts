@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.toolingPreview)
     implementation(libs.material3)
     implementation(libs.timber)
+    implementation(libs.constraintlayout)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.kotlinx.coroutines.android)

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -35,9 +36,10 @@ class DetailViewModel @Inject constructor(
 
     override fun mapIntents(intent: DetailIntent): Flow<DetailUiState.PartialState> =
         when (intent) {
-            is DetailIntent.ChangeTab -> TODO()
+            is DetailIntent.ChangeTab -> flowOf(DetailUiState.PartialState.ChangeTab(intent.selectedTabIndex))
             is DetailIntent.GetMovieDetail -> getMovieDetail(intent.id)
             is DetailIntent.OnFavoriteClick -> TODO()
+            DetailIntent.OnNavigateBackClick -> TODO()
         }
 
     override fun reduceUiState(
@@ -46,7 +48,9 @@ class DetailViewModel @Inject constructor(
     ): DetailUiState =
         when (partialState) {
             is DetailUiState.PartialState.AddMovieDetail -> previousState.copy(
-                movieDetail = partialState.detail
+                movieDetail = partialState.detail,
+                isLoading = false,
+                isError = false
             )
 
             is DetailUiState.PartialState.Error -> previousState.copy(
@@ -60,6 +64,9 @@ class DetailViewModel @Inject constructor(
             )
 
             is DetailUiState.PartialState.MakeFavorite -> TODO()
+            is DetailUiState.PartialState.ChangeTab -> previousState.copy(
+                selectedTabIndex = partialState.selectedTabIndex
+            )
         }
 
 

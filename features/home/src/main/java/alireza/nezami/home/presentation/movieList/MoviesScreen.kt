@@ -5,7 +5,7 @@ import alireza.nezami.designsystem.component.HeightSpacer
 import alireza.nezami.designsystem.component.MovieCard
 import alireza.nezami.designsystem.component.SearchInput
 import alireza.nezami.designsystem.component.Tab
-import alireza.nezami.designsystem.component.TabRow
+import alireza.nezami.designsystem.component.ScrollableTabRow
 import alireza.nezami.designsystem.extensions.collectWithLifecycle
 import alireza.nezami.home.presentation.movieList.contract.MoviesEvent
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
@@ -255,7 +255,7 @@ private fun TabContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit)
         R.string.top_rated,
         R.string.popular,
     )
-    TabRow(selectedTabIndex = uiState.selectedTabIndex) {
+    ScrollableTabRow(selectedTabIndex = uiState.selectedTabIndex) {
         titles.forEachIndexed { index, title ->
             Tab(
                 selected = uiState.selectedTabIndex == index,

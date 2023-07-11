@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 sealed class DetailTabState(val index: Int) : Parcelable {
     @Parcelize
-    object Info : DetailTabState(0)
+    object Overview : DetailTabState(0)
 
     @Parcelize
-    object Overview : DetailTabState(1)
+    object Info : DetailTabState(1)
 
     @Parcelize
     object Production : DetailTabState(2)

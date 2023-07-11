@@ -9,7 +9,7 @@ import javax.annotation.concurrent.Immutable
 @Parcelize
 data class DetailUiState(
     val movieDetail: MovieDetail? = null,
-    val selectedTabIndex: Int = DetailTabState.Info.index,
+    val selectedTabIndex: Int = DetailTabState.Overview.index,
 
     val isLoading: Boolean = false,
     val isError: Boolean = false,
@@ -21,5 +21,7 @@ data class DetailUiState(
         data class Error(val errorMessage: String) : PartialState()
         data class Loading(val shown: Boolean) : PartialState()
         data class MakeFavorite(val isFavorite: Boolean) : PartialState()
+        data class ChangeTab(val selectedTabIndex: Int) : PartialState()
+
     }
 }

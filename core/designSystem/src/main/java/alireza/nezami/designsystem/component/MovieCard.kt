@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -85,35 +83,10 @@ fun MovieCard(
                     imageUrl = moviePosterUrl
                 )
 
-                Row(
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .align(Alignment.BottomEnd)
-                        .background(
-                            color = MaterialTheme.colorScheme.background.copy(
-                                alpha = 0.8f
-                            ),
-                            shape = MaterialTheme.shapes.small
-                        )
-                        .padding(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Rating Icon",
-                        tint = MaterialTheme.colorScheme.secondary,
-                        modifier = Modifier
-                            .size(16.dp)
-                            .padding(end = 4.dp)
-                    )
-                    Text(
-                        text = movieRating.toString(),
-                        style = MaterialTheme.typography.titleSmall.copy(
-                            color = MaterialTheme.colorScheme.secondary,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                }
+                Rating(
+                    modifier = Modifier.align(Alignment.BottomEnd),
+                    rating = movieRating
+                )
             }
 
             Text(
@@ -136,7 +109,7 @@ fun MovieCard(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_genre),
                     contentDescription = "Genre Icon",
-                    tint = Color.White,
+                    tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(16.dp)
                 )
                 Text(
@@ -163,7 +136,7 @@ fun MovieCard(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_calendar),
                         contentDescription = "Release Date Icon",
-                        tint = Color.White,
+                        tint = MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
@@ -183,7 +156,7 @@ fun MovieCard(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_user),
                         contentDescription = "Duration Icon",
-                        tint = Color.White,
+                        tint = MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
@@ -213,7 +186,7 @@ fun MovieCardPreview() {
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
             voteCount = 100
-        ){}
+        ) {}
     }
 }
 
@@ -229,6 +202,6 @@ fun MovieCardPreview2() {
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
             voteCount = 100
-        ){}
+        ) {}
     }
 }
