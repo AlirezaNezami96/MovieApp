@@ -3,6 +3,7 @@
 package alireza.nezami.designsystem.component
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Favorite
@@ -16,19 +17,22 @@ import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar(
     @StringRes titleRes: Int,
     navigationIcon: ImageVector,
-    navigationIconContentDescription: String?,
+    navigationIconContentDescription: String? = null,
     actionIcon: ImageVector,
-    actionIconContentDescription: String?,
+    actionIconTint: Color? = null,
+    actionIconContentDescription: String? = null,
     modifier: Modifier = Modifier,
     colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
     onNavigationClick: () -> Unit = {},
@@ -50,12 +54,14 @@ fun TopAppBar(
                 Icon(
                     imageVector = actionIcon,
                     contentDescription = actionIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
+                    tint = actionIconTint ?: MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
         colors = colors,
-        modifier = modifier.testTag("topAppBar"),
+        modifier = modifier
+            .testTag("topAppBar")
+            .heightIn(max = 64.dp),
     )
 }
 
