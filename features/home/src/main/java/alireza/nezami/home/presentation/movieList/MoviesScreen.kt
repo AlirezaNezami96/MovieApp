@@ -88,6 +88,9 @@ fun MoviesContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit) {
             onPaginate = {
                 onIntent.invoke(MoviesIntent.GetNowPlaying())
             },
+            onMovieCardClick = {
+                onIntent.invoke(MoviesIntent.OnMovieClick(it))
+            }
         )
         MoviesListContent(
             shown = uiState.selectedTabIndex == MoviesTabState.Upcoming.index,
@@ -96,6 +99,9 @@ fun MoviesContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit) {
             onPaginate = {
                 onIntent.invoke(MoviesIntent.GetUpcoming())
             },
+            onMovieCardClick = {
+                onIntent.invoke(MoviesIntent.OnMovieClick(it))
+            }
         )
 
         MoviesListContent(
@@ -105,6 +111,9 @@ fun MoviesContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit) {
             onPaginate = {
                 onIntent.invoke(MoviesIntent.GetTopRated())
             },
+            onMovieCardClick = {
+                onIntent.invoke(MoviesIntent.OnMovieClick(it))
+            }
         )
 
         MoviesListContent(
@@ -113,6 +122,9 @@ fun MoviesContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit) {
             list = uiState.popularMovies,
             onPaginate = {
                 onIntent.invoke(MoviesIntent.GetPopular())
+            },
+            onMovieCardClick = {
+                onIntent.invoke(MoviesIntent.OnMovieClick(it))
             }
         )
     }
@@ -135,6 +147,7 @@ fun MoviesListContent(
     listState: MovieState,
     list: List<Movie>,
     onPaginate: () -> Unit,
+    onMovieCardClick: (id: Int) -> Unit,
     shown: Boolean
 ) {
     if (shown) {
@@ -168,7 +181,10 @@ fun MoviesListContent(
                     movieRating = movie.voteAverage,
                     movieGenres = movie.genreNames,
                     releaseDate = movie.releaseDate,
-                    voteCount = movie.voteCount
+                    voteCount = movie.voteCount,
+                    onMovieCardClick = {
+                        onMovieCardClick(movie.id)
+                    }
                 )
             }
 

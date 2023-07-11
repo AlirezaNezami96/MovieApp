@@ -2,6 +2,7 @@ package alireza.nezami.network.model.movie
 
 
 import alireza.nezami.common.extensions.formatToOneDecimalPlace
+import alireza.nezami.common.extensions.orEmptyList
 import alireza.nezami.common.extensions.orFalse
 import alireza.nezami.common.extensions.orZero
 import alireza.nezami.common.utils.DateUtils
@@ -52,12 +53,13 @@ fun MovieResultDto?.asExternalModel(): Movie {
         originalTitle = this?.originalTitle.orEmpty(),
         overview = this?.overview.orEmpty(),
         popularity = this?.popularity.orZero(),
-        posterPath = "https://image.tmdb.org/t/p/original/${this?.posterPath.orEmpty()}",
+        posterPath = "https://image.tmdb.org/t/p/w342/${this?.posterPath.orEmpty()}",
         releaseDate = DateUtils.getYearFromDate(this?.releaseDate.orEmpty()),
         title = this?.title.orEmpty(),
         video = this?.video.orFalse(),
         voteAverage = this?.voteAverage.formatToOneDecimalPlace().orZero(),
-        voteCount = this?.voteCount.orZero()
+        voteCount = this?.voteCount.orZero(),
+        genreNames = this?.genreNames.orEmptyList()
     )
 }
 

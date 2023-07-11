@@ -64,7 +64,11 @@ class MoviesViewModel @Inject constructor(
                 intent.page ?: uiState.value.popularMovieState.nextPage
             )
 
-            is MoviesIntent.OnMovieClick -> TODO()
+            is MoviesIntent.OnMovieClick -> {
+                publishEvent(MoviesEvent.NavigateToMovieDetail(intent.id))
+                emptyFlow()
+            }
+
             MoviesIntent.OnSearchClick -> {
                 publishEvent(MoviesEvent.NavigateToSearch)
                 emptyFlow()

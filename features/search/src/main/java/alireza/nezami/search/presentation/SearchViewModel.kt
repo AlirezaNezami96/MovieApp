@@ -7,9 +7,9 @@ import alireza.nezami.common.utils.flattenMerge
 import alireza.nezami.domain.usecase.SearchForMoviesUseCase
 import alireza.nezami.model.movie.ListState
 import alireza.nezami.model.movie.Movie
+import alireza.nezami.search.presentation.contract.SearchEvent
 import alireza.nezami.search.presentation.contract.SearchIntent
 import alireza.nezami.search.presentation.contract.SearchUiState
-import android.view.SearchEvent
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -41,11 +41,14 @@ class SearchViewModel @Inject constructor(
 
     override fun mapIntents(intent: SearchIntent): Flow<SearchUiState.PartialState> =
         when (intent) {
-            is SearchIntent.OnMovieClick -> TODO()
+            is SearchIntent.OnMovieClick -> {
+                publishEvent(SearchEvent.NavigateToMovieDetail(intent.id))
+                emptyFlow()
+            }
             is SearchIntent.EnterSearchQuery -> flattenMerge(
                 flowOf(SearchUiState.PartialState.EnterSearchQuery(intent.query)),
                 searchMovies(
-                    page = uiState.value.searchResultState.page,
+                    page = 1,
                     query = MutableStateFlow(intent.query)
                 )
             )

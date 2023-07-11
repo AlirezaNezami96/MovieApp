@@ -4,6 +4,7 @@ import alireza.nezami.common.extensions.formatWithCommas
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.theme.MovieAppTheme
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -38,7 +39,8 @@ fun SearchMovieCard(
     movieRating: Double,
     movieGenres: List<String>,
     releaseDate: String,
-    voteCount: Int
+    voteCount: Int,
+    onMovieCardClick: () -> Unit
 ) {
     val isOddPosition = position % 2 != 0
     val gradientColors =
@@ -54,7 +56,10 @@ fun SearchMovieCard(
     Card(
         modifier = Modifier
             .padding(bottom = 8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onMovieCardClick()
+            },
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors()
     ) {
@@ -196,7 +201,7 @@ fun SearchMovieCardPreview() {
             movieGenres = listOf("Action", "Drama, Action", "Drama"),
             releaseDate = "2019",
             voteCount = 12
-        )
+        ){}
     }
 }
 
@@ -213,7 +218,7 @@ fun SearchMovieCardPreview2() {
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
             voteCount = 134
-        )
+        ){}
     }
 }
 

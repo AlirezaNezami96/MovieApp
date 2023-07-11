@@ -25,4 +25,10 @@ object CoroutineScopesModule {
     fun providesCoroutineScope(
         @Dispatcher(Dispatchers.Default) dispatcher: CoroutineDispatcher,
     ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
+
+    @Provides
+    @Singleton
+    fun providesGlobalCoroutineScope(
+        @ApplicationScope coroutineScope: CoroutineScope,
+    ): CoroutineScope = coroutineScope
 }

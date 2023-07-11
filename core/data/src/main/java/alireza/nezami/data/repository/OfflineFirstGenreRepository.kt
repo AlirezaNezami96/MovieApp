@@ -15,10 +15,6 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class OfflineFirstGenreRepository @Inject constructor(
-    private val networkDataSource: NetworkDataSource,
-    private val genreDao: GenreDao,
-    private val coroutineScope: CoroutineScope,
-    private val genreMapper: GenreMapper,
     private val genreSynchronizer: GenreSynchronizer
 ) : GenreRepository {
 

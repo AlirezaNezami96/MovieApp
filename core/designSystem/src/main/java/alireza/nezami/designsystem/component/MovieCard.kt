@@ -4,6 +4,7 @@ import alireza.nezami.common.extensions.formatWithCommas
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.theme.MovieAppTheme
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,7 +41,8 @@ fun MovieCard(
     movieRating: Double,
     movieGenres: List<String>,
     releaseDate: String,
-    voteCount: Int
+    voteCount: Int,
+    onMovieCardClick: () -> Unit
 ) {
     val isOddPosition = position % 2 != 0
     val gradientColors =
@@ -60,7 +62,10 @@ fun MovieCard(
                 end = if (!isOddPosition) 4.dp else 0.dp,
                 bottom = 8.dp
             )
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onMovieCardClick()
+            },
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors()
     ) {
@@ -136,7 +141,7 @@ fun MovieCard(
                 )
                 Text(
                     text = movieGenres.joinToString(", "),
-                    style = MaterialTheme.typography.bodySmall.copy(
+                    style = MaterialTheme.typography.labelMedium.copy(
                         color = MaterialTheme.colorScheme.onSurface,
                     ),
                     modifier = Modifier.padding(start = 4.dp),
@@ -151,7 +156,7 @@ fun MovieCard(
                     .padding(top = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
-            ){
+            ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -208,7 +213,7 @@ fun MovieCardPreview() {
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
             voteCount = 100
-        )
+        ){}
     }
 }
 
@@ -224,6 +229,6 @@ fun MovieCardPreview2() {
             movieGenres = listOf("Action", "Drama"),
             releaseDate = "2019",
             voteCount = 100
-        )
+        ){}
     }
 }

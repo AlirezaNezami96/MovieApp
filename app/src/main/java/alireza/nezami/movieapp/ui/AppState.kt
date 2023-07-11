@@ -1,10 +1,13 @@
 package alireza.nezami.movieapp.ui
 
 import alireza.nezami.data.util.NetworkMonitor
-import alireza.nezami.home.navigation.moviesNavigationRoute
-import alireza.nezami.home.navigation.navigateToMovies
+import alireza.nezami.favorite.navigation.favoriteNavigationRoute
+import alireza.nezami.favorite.navigation.navigateToFavorite
+import alireza.nezami.home.navigation.homeNavigationRoute
+import alireza.nezami.home.navigation.navigateToHome
 import alireza.nezami.movieapp.navigation.TopLevelDestination
 import alireza.nezami.search.navigation.navigateToSearch
+import alireza.nezami.search.navigation.searchNavigationRoute
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
@@ -51,8 +54,9 @@ class AppState(
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentDestination?.route) {
-            moviesNavigationRoute -> TopLevelDestination.HOME
-            //todo: add rest of routes
+            homeNavigationRoute -> TopLevelDestination.HOME
+            searchNavigationRoute -> TopLevelDestination.SEARCH
+            favoriteNavigationRoute -> TopLevelDestination.FAVORITE
             else -> null
         }
 
@@ -94,9 +98,9 @@ class AppState(
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.HOME -> navController.navigateToMovies(topLevelNavOptions)
+            TopLevelDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
             TopLevelDestination.SEARCH -> navController.navigateToSearch(topLevelNavOptions)
-            TopLevelDestination.FAVORITE -> TODO()
+            TopLevelDestination.FAVORITE -> navController.navigateToFavorite(topLevelNavOptions)
         }
     }
 }
