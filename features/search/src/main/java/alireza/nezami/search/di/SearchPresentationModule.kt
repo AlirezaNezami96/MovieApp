@@ -11,6 +11,6 @@ import dagger.hilt.android.components.ViewModelComponent
 object SearchPresentationModule {
 
     @Provides
-    fun provideMoviesUiState(): SearchUiState = SearchUiState()
+    fun provideSearchUiState(): SearchUiState = SearchUiState()
 
 }
