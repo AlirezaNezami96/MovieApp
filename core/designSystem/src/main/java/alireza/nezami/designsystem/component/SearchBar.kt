@@ -2,12 +2,7 @@ package alireza.nezami.designsystem.component
 
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.theme.MovieAppTheme
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -43,7 +38,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SearchInput(
     modifier: Modifier = Modifier,
@@ -88,7 +82,7 @@ fun SearchInput(
             enabled = enabled
         )
 
-        AnimatedFadeVisibility(visible = isLoading) {
+        if (isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
@@ -96,7 +90,7 @@ fun SearchInput(
             )
         }
 
-        AnimatedFadeVisibility(visible = isFocused) {
+        if (isFocused) {
             CloseIcon(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
@@ -106,7 +100,7 @@ fun SearchInput(
             }
         }
 
-        AnimatedFadeVisibility(visible = !isLoading && !isFocused) {
+        if (!isLoading && !isFocused) {
             SearchIcon(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
@@ -139,7 +133,7 @@ fun TextInput(
             imeAction = ImeAction.Search
         ),
         keyboardActions = KeyboardActions(
-            onSearch = { focusManager.clearFocus()},
+            onSearch = { focusManager.clearFocus() },
         ),
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
@@ -193,25 +187,6 @@ fun CloseIcon(
             contentDescription = "Close Icon"
         )
     }
-}
-
-@ExperimentalAnimationApi
-@Composable
-fun AnimatedFadeVisibility(
-    visible: Boolean,
-    modifier: Modifier = Modifier,
-    content: @Composable() AnimatedVisibilityScope.() -> Unit
-) {
-    val enterFadeIn = remember { fadeIn(animationSpec = tween(durationMillis = 300)) }
-    val exitFadeOut = remember { fadeOut(animationSpec = tween(durationMillis = 300)) }
-
-    AnimatedVisibility(
-        visible = visible,
-        enter = enterFadeIn,
-        exit = exitFadeOut,
-        modifier = modifier,
-        content = content
-    )
 }
 
 @Preview
