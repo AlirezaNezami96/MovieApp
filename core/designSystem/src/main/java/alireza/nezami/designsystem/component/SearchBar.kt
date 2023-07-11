@@ -90,7 +90,7 @@ fun SearchInput(
             )
         }
 
-        if (isFocused) {
+        if (isFocused && !isLoading) {
             CloseIcon(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)

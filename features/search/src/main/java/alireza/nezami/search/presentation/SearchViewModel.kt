@@ -48,7 +48,7 @@ class SearchViewModel @Inject constructor(
             is SearchIntent.EnterSearchQuery -> flattenMerge(
                 flowOf(SearchUiState.PartialState.EnterSearchQuery(intent.query)),
                 searchMovies(
-                    page = uiState.value.searchResultState.page,
+                    page = 1,
                     query = MutableStateFlow(intent.query)
                 )
             )

@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -89,8 +91,13 @@ fun MoviesListContent(
     list: List<Movie>,
     onMovieCardClick: (id: Int) -> Unit
 ) {
-    LazyColumn {
+    val lazyGridState = rememberLazyGridState()
 
+    LazyVerticalGrid(
+        state = lazyGridState,
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(vertical = 16.dp)
+    ) {
         itemsIndexed(
             items = list,
             key = { _, data -> data.id }
