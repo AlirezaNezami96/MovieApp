@@ -6,10 +6,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 
-const val moviesNavigationRoute = "home_route"
+const val homeNavigationRoute = "home_route"
 
-fun NavController.navigateToMovies(navOptions: NavOptions? = null) {
-    this.navigate(moviesNavigationRoute, navOptions)
+fun NavController.navigateToHome(navOptions: NavOptions? = null) {
+    this.navigate(homeNavigationRoute, navOptions)
 }
 
 fun NavGraphBuilder.moviesScreen(
@@ -17,7 +17,7 @@ fun NavGraphBuilder.moviesScreen(
     onSearchClick: () -> Unit
 ) {
     composable(
-        route = moviesNavigationRoute,
+        route = homeNavigationRoute,
     ) {
         MoviesScreen(onMovieClick = onMovieClick, onSearchClick = onSearchClick)
     }
