@@ -22,6 +22,7 @@ data class DetailUiState(
         data class Loading(val shown: Boolean) : PartialState()
         data class MakeFavorite(val isFavorite: Boolean) : PartialState()
         data class ChangeTab(val selectedTabIndex: Int) : PartialState()
+        data class IsMovieFavorite(val isMovieFavorite: Boolean) : PartialState()
 
     }
 }

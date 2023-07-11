@@ -1,6 +1,7 @@
 package alireza.nezami.model.movieDetial
 
 import alireza.nezami.model.genre.Genre
+import alireza.nezami.model.movie.Movie
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -32,3 +33,25 @@ data class MovieDetail(
     val voteAverage: Double,
     val voteCount: Int
 ) : Parcelable
+
+/**
+ * Extension function to map a [MovieDetail] object into a [Movie] object.
+ */
+fun MovieDetail.toMovie(): Movie {
+    return Movie(
+        adult = adult,
+        backdropPath = backdropPath,
+        genreNames = genres.map { it.name },
+        id = id,
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
+        title = title,
+        video = video,
+        voteAverage = voteAverage,
+        voteCount = voteCount
+    )
+}

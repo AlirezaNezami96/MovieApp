@@ -46,7 +46,9 @@ fun AppNavHost(
             onMovieClick = navController::navigateToDetail
         )
 
-        detailScreen()
+        detailScreen(
+            navigateUp = navController::navigateUp
+        )
 
     }
 }

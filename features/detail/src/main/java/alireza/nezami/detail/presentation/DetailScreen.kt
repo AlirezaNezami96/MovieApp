@@ -1,6 +1,7 @@
 package alireza.nezami.detail.presentation
 
 import alireza.nezami.common.extensions.orEmptyList
+import alireza.nezami.common.extensions.toYesOrNo
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.component.DynamicAsyncImage
 import alireza.nezami.designsystem.component.HeightSpacer
@@ -9,9 +10,12 @@ import alireza.nezami.designsystem.component.Tab
 import alireza.nezami.designsystem.component.TabRow
 import alireza.nezami.designsystem.component.TopAppBar
 import alireza.nezami.designsystem.component.WidthSpacer
+import alireza.nezami.designsystem.extensions.collectWithLifecycle
+import alireza.nezami.detail.presentation.contract.DetailEvent
 import alireza.nezami.detail.presentation.contract.DetailIntent
 import alireza.nezami.detail.presentation.contract.DetailTabState
 import alireza.nezami.detail.presentation.contract.DetailUiState
+import alireza.nezami.model.movieDetial.MovieDetail
 import alireza.nezami.model.movieDetial.ProductionCompany
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -51,14 +55,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun DetailScreen(
-    viewModel: DetailViewModel = hiltViewModel()
+    viewModel: DetailViewModel = hiltViewModel(),
+    navigateUp: () -> Unit
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
 
+    HandleEvents(
+        events = viewModel.event,
+        navigateUp = navigateUp
+    )
 
     DetailContent(
         uiState = uiState,
@@ -82,12 +92,130 @@ fun DetailContent(uiState: DetailUiState, onIntent: (DetailIntent) -> Unit) {
             shown = uiState.selectedTabIndex == DetailTabState.Overview.index,
             overview = uiState.movieDetail?.overview.orEmpty()
         )
+        infoContent(
+            shown = uiState.selectedTabIndex == DetailTabState.Info.index,
+            movie = uiState.movieDetail
+        )
         productionContent(
             shown = uiState.selectedTabIndex == DetailTabState.Production.index,
             productionList = uiState.movieDetail?.productionCompanies.orEmptyList()
         )
     }
 
+}
+
+fun LazyListScope.infoContent(shown: Boolean, movie: MovieDetail?) {
+    if (shown) {
+        movie?.let { movieDetail ->
+            item {
+                InfoItem(
+                    title = stringResource(R.string.genres),
+                    icon = R.drawable.ic_genre,
+                    text = movieDetail.genres.joinToString(",") { it.name }
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.budget),
+                    icon = R.drawable.ic_revenue,
+                    text = movieDetail.budget.toString()
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.release_date),
+                    icon = R.drawable.ic_calendar,
+                    text = movieDetail.releaseDate
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.status),
+                    icon = R.drawable.ic_status,
+                    text = movieDetail.status
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.revenue),
+                    icon = R.drawable.ic_revenue,
+                    text = movieDetail.revenue.toString()
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.vote_average),
+                    icon = R.drawable.ic_user,
+                    text = movieDetail.voteAverage.toString()
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.vote_count),
+                    icon = R.drawable.ic_status,
+                    text = movieDetail.voteCount.toString()
+                )
+            }
+            item {
+                InfoItem(
+                    title = stringResource(R.string.adult),
+                    icon = R.drawable.ic_duration,
+                    text = movieDetail.adult.toYesOrNo()
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun InfoItem(
+    icon: Int,
+    title: String,
+    text: String,
+) {
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .fillMaxWidth()
+            .padding(4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = "",
+            tint = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.size(20.dp)
+        )
+
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onSurface,
+            ),
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(0.4f)
+        )
+
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground,
+            ),
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(0.7f)
+        )
+
+    }
+
+    Divider(
+        modifier = Modifier
+            .padding(horizontal = 16.dp),
+        color = MaterialTheme.colorScheme.onSurface,
+        thickness = (0.5).dp
+    )
 }
 
 fun LazyListScope.productionContent(shown: Boolean, productionList: List<ProductionCompany>) {
@@ -145,7 +273,7 @@ fun LazyListScope.overViewContent(shown: Boolean, overview: String) {
                 text = overview,
                 style = MaterialTheme.typography.titleMedium.copy(
                     color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = FontWeight.Normal
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -176,7 +304,7 @@ fun LazyListScope.briefInfo(uiState: DetailUiState) {
                 )
                 RowInfo(
                     icon = R.drawable.ic_genre,
-                    text = movieDetail.genres.first().name
+                    text = movieDetail.genres.firstOrNull()?.name ?: ""
                 )
             }
         }
@@ -192,28 +320,24 @@ fun RowInfo(
     icon: Int,
     text: String
 ) {
-    Row(
-        modifier = Modifier
-    ) {
-        Icon(
-            painter = painterResource(id = icon),
-            contentDescription = "Release Date Icon",
-            tint = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.size(16.dp)
-        )
+    Icon(
+        painter = painterResource(id = icon),
+        contentDescription = "Release Date Icon",
+        tint = MaterialTheme.colorScheme.onBackground,
+        modifier = Modifier.size(16.dp)
+    )
 
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodySmall.copy(
-                color = MaterialTheme.colorScheme.onSurface,
-            ),
-            modifier = Modifier.padding(start = 4.dp),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodySmall.copy(
+            color = MaterialTheme.colorScheme.onSurface,
+        ),
+        modifier = Modifier.padding(start = 4.dp),
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
 
-        WidthSpacer(value = 16)
-    }
+    WidthSpacer(value = 16)
 }
 
 fun LazyListScope.header(uiState: DetailUiState, onIntent: (DetailIntent) -> Unit) {
@@ -350,4 +474,18 @@ private fun LazyListScope.tabContent(uiState: DetailUiState, onIntent: (DetailIn
         }
     }
 }
+
+
+@Composable
+private fun HandleEvents(
+    events: Flow<DetailEvent>,
+    navigateUp: () -> Unit
+) {
+    events.collectWithLifecycle {
+        when (it) {
+            DetailEvent.NavigateBack -> navigateUp()
+        }
+    }
+}
+
 

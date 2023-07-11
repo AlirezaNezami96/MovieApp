@@ -18,4 +18,12 @@
     <string name="info">Info</string>
     <string name="overview">Overview</string>
     <string name="production">Production</string>
+    <string name="genres">Genres</string>
+    <string name="budget">Budget</string>
+    <string name="release_date">Release Date</string>
+    <string name="status">Status</string>
+    <string name="revenue">Revenue</string>
+    <string name="vote_average">Vote Average</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="adult">Adult</string>
 </resources>

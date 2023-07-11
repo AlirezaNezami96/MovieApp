@@ -25,13 +25,17 @@ fun NavController.navigateToDetail(movieId: Int) {
     }
 }
 
-fun NavGraphBuilder.detailScreen() {
+fun NavGraphBuilder.detailScreen(
+    navigateUp: () -> Unit
+) {
     composable(
         route = "detail_route/{$movieIdArg}",
         arguments = listOf(
             navArgument(movieIdArg) { type = NavType.StringType },
         )
     ) {
-        DetailScreen()
+        DetailScreen(
+            navigateUp = navigateUp
+        )
     }
 }

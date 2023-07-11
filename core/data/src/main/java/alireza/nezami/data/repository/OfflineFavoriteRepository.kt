@@ -17,6 +17,10 @@ class OfflineFavoriteRepository @Inject constructor(
             it.map(MovieEntity::asExternalModel)
         }
 
+    override suspend fun isMovieFavorite(id: Int): Flow<Boolean> =
+        favoriteDao.getMovieDetail(id)
+            .map { movieEntity -> movieEntity != null }
+
     override suspend fun deleteFavoriteMovie(id: Int) {
         favoriteDao.deleteFavorite(id)
     }

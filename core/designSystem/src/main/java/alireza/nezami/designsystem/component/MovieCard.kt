@@ -110,7 +110,7 @@ fun MovieCard(
                     painter = painterResource(id = R.drawable.ic_genre),
                     contentDescription = "Genre Icon",
                     tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(14.dp)
                 )
                 Text(
                     text = movieGenres.joinToString(", "),
@@ -137,7 +137,7 @@ fun MovieCard(
                         painter = painterResource(id = R.drawable.ic_calendar),
                         contentDescription = "Release Date Icon",
                         tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(14.dp)
                     )
                     Text(
                         text = releaseDate,
@@ -157,7 +157,7 @@ fun MovieCard(
                         painter = painterResource(id = R.drawable.ic_user),
                         contentDescription = "Duration Icon",
                         tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(14.dp)
                     )
                     Text(
                         text = voteCount.formatWithCommas(),

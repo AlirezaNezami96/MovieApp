@@ -58,7 +58,7 @@ fun MoviesScreen(
     HandleEvents(
         events = viewModel.event,
         navigateToMovieDetail = onMovieClick,
-        NavigateToSearch = onSearchClick
+        navigateToSearch = onSearchClick
     )
 
     MoviesContent(
@@ -272,11 +272,11 @@ private fun TabContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit)
 private fun HandleEvents(
     events: Flow<MoviesEvent>,
     navigateToMovieDetail: (Int) -> Unit,
-    NavigateToSearch: () -> Unit
+    navigateToSearch: () -> Unit
 ) {
     events.collectWithLifecycle {
         when (it) {
-            MoviesEvent.NavigateToSearch -> NavigateToSearch()
+            MoviesEvent.NavigateToSearch -> navigateToSearch()
             is MoviesEvent.NavigateToMovieDetail -> navigateToMovieDetail(it.id)
         }
     }

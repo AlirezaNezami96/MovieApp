@@ -37,7 +37,8 @@ fun MovieEntity.asExternalModel(): Movie {
         title = title,
         video = video,
         voteAverage = voteAverage,
-        voteCount = voteCount
+        voteCount = voteCount,
+        genreNames = genreNames
     )
 }
 

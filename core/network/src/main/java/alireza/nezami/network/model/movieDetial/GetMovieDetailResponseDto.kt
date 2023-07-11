@@ -70,7 +70,7 @@ data class GetMovieDetailResponseDto(
 fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
     return MovieDetail(
         adult = this?.adult.orFalse(),
-        backdropPath = "https://image.tmdb.org/t/p/original/${this?.backdropPath.orEmpty()}",
+        backdropPath = "https://image.tmdb.org/t/p/w500/${this?.backdropPath.orEmpty()}",
         belongsToCollection = this?.belongsToCollection.asExternalModel(),
         budget = this?.budget.orZero(),
         genres = this?.genres?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
@@ -81,7 +81,7 @@ fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
         originalTitle = this?.originalTitle.orEmpty(),
         overview = this?.overview.orEmpty(),
         popularity = this?.popularity.orZero(),
-        posterPath = "https://image.tmdb.org/t/p/w342/${this?.posterPath.orEmpty()}",
+        posterPath = "https://image.tmdb.org/t/p/w185/${this?.posterPath.orEmpty()}",
         productionCompanies = this?.productionCompanies?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
         productionCountries = this?.productionCountries?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
         releaseDate = DateUtils.getYearFromDate(this?.releaseDate.orEmpty()),
