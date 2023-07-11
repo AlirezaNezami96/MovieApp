@@ -1,19 +1,19 @@
 package alireza.nezami.data.util
 
 import alireza.nezami.database.dao.GenreDao
-import alireza.nezami.database.entity.genre.GenreEntity
-import alireza.nezami.model.genre.Genre
 import alireza.nezami.network.dataSource.NetworkDataSource
-import alireza.nezami.network.model.genre.GenreResponse
-import alireza.nezami.network.model.genre.GetGenreListResponseDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class GenreSynchronizer(
+class GenreSynchronizer @Inject constructor(
     private val localDataSource: GenreDao,
     private val remoteDataSource: NetworkDataSource,
     private val coroutineScope: CoroutineScope,
@@ -41,7 +41,7 @@ class GenreSynchronizer(
 
         try {
             localDataSource.getGenreList().map { localData ->
-                if ( localData.isEmpty()) {
+                if (localData.isEmpty()) {
                     remoteDataSource.getGenreList().map { remoteData ->
                         if (remoteData.genres?.isNotEmpty() == true) {
                             val mappedData = mapper.mapToEntities(remoteData.genres.orEmpty())
@@ -51,24 +51,22 @@ class GenreSynchronizer(
                             synchronizationState.value =
                                 SynchronizationState.Error("Failed to fetch remote data")
                         }
-                    }
+                    }.catch {
+                        synchronizationState.value =
+                            SynchronizationState.Error("Failed to fetch remote data")
+                    }.collect()
 
                 } else {
                     synchronizationState.value = SynchronizationState.Success(localData)
                 }
-            }
+            }.catch {
+                synchronizationState.value =
+                    SynchronizationState.Error("Failed to fetch local data")
+                Timber.i("syncing genre list: ${it.message}")
+            }.collect()
 
         } catch (e: Exception) {
             synchronizationState.value = SynchronizationState.Error(e.message ?: "Unknown error")
         }
     }
 }
-
-sealed class SynchronizationState {
-    object Idle : SynchronizationState()
-    object InProgress : SynchronizationState()
-    data class Success(val data: List<GenreEntity>) : SynchronizationState()
-    data class Error(val message: String) : SynchronizationState()
-}
-
-

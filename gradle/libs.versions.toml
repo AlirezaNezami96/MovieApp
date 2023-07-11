@@ -24,6 +24,7 @@ coil = "2.2.2"
 viewModelVersion = "2.6.1"
 viewModelComposeVersion = ":2.6.1"
 timber = "4.7.1"
+androidxCoreSplashscreen = "1.0.0"
 
 
 [libraries]
@@ -57,4 +58,5 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVers
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 
