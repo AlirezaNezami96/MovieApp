@@ -1,7 +1,10 @@
 package alireza.nezami.model.movieDetial
 
 import alireza.nezami.model.genre.Genre
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class MovieDetail(
     val adult: Boolean,
     val backdropPath: String,
@@ -28,4 +31,4 @@ data class MovieDetail(
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int
-)
+) : Parcelable
