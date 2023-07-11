@@ -5,9 +5,11 @@ import alireza.nezami.designsystem.component.EmptySearchResult
 import alireza.nezami.designsystem.component.HeightSpacer
 import alireza.nezami.designsystem.component.SearchInput
 import alireza.nezami.designsystem.component.SearchMovieCard
+import alireza.nezami.designsystem.extensions.collectWithLifecycle
 import alireza.nezami.model.movie.ListState
 import alireza.nezami.model.movie.Movie
 import alireza.nezami.model.movie.MovieState
+import alireza.nezami.search.presentation.contract.SearchEvent
 import alireza.nezami.search.presentation.contract.SearchIntent
 import alireza.nezami.search.presentation.contract.SearchUiState
 import androidx.compose.foundation.background
@@ -40,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun SearchScreen(
@@ -48,6 +51,8 @@ fun SearchScreen(
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
+
+    HandleEvents(events = viewModel.event, navigateToMovieDetail = onMovieClick)
 
     SearchContent(
         uiState = uiState,
@@ -79,6 +84,9 @@ fun SearchContent(uiState: SearchUiState, onIntent: (SearchIntent) -> Unit) {
             onPaginate = {
                 onIntent.invoke(SearchIntent.Paginate)
             },
+            onMovieCardClick = {
+                onIntent.invoke(SearchIntent.OnMovieClick(it))
+            }
         )
     }
 }
@@ -100,6 +108,7 @@ fun MoviesListContent(
     listState: MovieState,
     list: List<Movie>,
     onPaginate: () -> Unit,
+    onMovieCardClick: (id: Int) -> Unit
 ) {
     val lazyListThreshold = 6
     val lazyListState = rememberLazyListState()
@@ -130,7 +139,10 @@ fun MoviesListContent(
                 movieRating = movie.voteAverage,
                 movieGenres = movie.genreNames,
                 releaseDate = movie.releaseDate,
-                voteCount = movie.voteCount
+                voteCount = movie.voteCount,
+                onMovieCardClick = {
+                    onMovieCardClick(movie.id)
+                }
             )
         }
 
@@ -198,4 +210,16 @@ fun SearchContent(
         onValueChange = {
             onIntent.invoke(SearchIntent.EnterSearchQuery(it))
         })
+}
+
+@Composable
+private fun HandleEvents(
+    events: Flow<SearchEvent>,
+    navigateToMovieDetail: (Int) -> Unit
+) {
+    events.collectWithLifecycle {
+        when (it) {
+            is SearchEvent.NavigateToMovieDetail -> navigateToMovieDetail(it.id)
+        }
+    }
 }
