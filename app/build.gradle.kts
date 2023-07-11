@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":features:search"))
     implementation(project(":features:favorite"))
+    implementation(project(":features:detail"))
+
     implementation(project(":core:data"))
     implementation(project(":core:model"))
     implementation(project(":core:domain"))
