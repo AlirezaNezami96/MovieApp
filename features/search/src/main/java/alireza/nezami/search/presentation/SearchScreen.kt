@@ -135,7 +135,7 @@ fun MoviesListContent(
             SearchMovieCard(
                 position = index,
                 movieTitle = movie.title,
-                moviePosterUrl = movie.backdropPath,
+                moviePosterUrl = movie.posterPath,
                 movieRating = movie.voteAverage,
                 movieGenres = movie.genreNames,
                 releaseDate = movie.releaseDate,

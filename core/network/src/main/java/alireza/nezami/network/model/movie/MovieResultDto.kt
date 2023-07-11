@@ -53,7 +53,7 @@ fun MovieResultDto?.asExternalModel(): Movie {
         originalTitle = this?.originalTitle.orEmpty(),
         overview = this?.overview.orEmpty(),
         popularity = this?.popularity.orZero(),
-        posterPath = "https://image.tmdb.org/t/p/original/${this?.posterPath.orEmpty()}",
+        posterPath = "https://image.tmdb.org/t/p/w342/${this?.posterPath.orEmpty()}",
         releaseDate = DateUtils.getYearFromDate(this?.releaseDate.orEmpty()),
         title = this?.title.orEmpty(),
         video = this?.video.orFalse(),
