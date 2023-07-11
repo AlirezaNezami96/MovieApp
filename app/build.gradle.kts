@@ -56,9 +56,12 @@ dependencies {
     implementation(project(":features:search"))
     implementation(project(":features:favorite"))
     implementation(project(":core:data"))
+    implementation(project(":core:model"))
+    implementation(project(":core:domain"))
     implementation(project(":core:designSystem"))
 
     implementation(libs.coreKtx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(platform(libs.kotlinBom))
     implementation(libs.lifecycleRuntimeKtx)
     implementation(libs.viewModelCompose)

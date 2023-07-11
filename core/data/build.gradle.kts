@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":core:common"))
 
     implementation(libs.coreKtx)
+    implementation(libs.timber)
     implementation(libs.kotlinx.coroutines.android)
     implementation(platform(libs.kotlinBom))
     implementation(libs.kotlinx.serialization.json)
