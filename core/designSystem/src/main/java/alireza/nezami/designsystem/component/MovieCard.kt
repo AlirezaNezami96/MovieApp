@@ -141,7 +141,7 @@ fun MovieCard(
                 )
                 Text(
                     text = movieGenres.joinToString(", "),
-                    style = MaterialTheme.typography.bodySmall.copy(
+                    style = MaterialTheme.typography.labelMedium.copy(
                         color = MaterialTheme.colorScheme.onSurface,
                     ),
                     modifier = Modifier.padding(start = 4.dp),

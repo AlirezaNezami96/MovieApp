@@ -134,7 +134,7 @@ fun SearchMovieCard(
                     )
                     Text(
                         text = movieGenres.joinToString(", "),
-                        style = MaterialTheme.typography.titleSmall.copy(
+                        style = MaterialTheme.typography.labelMedium.copy(
                             color = MaterialTheme.colorScheme.onSurface,
                         ),
                         modifier = Modifier.padding(start = 4.dp),
