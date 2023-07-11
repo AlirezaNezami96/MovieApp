@@ -1,17 +1,18 @@
 package alireza.nezami.detail.presentation
 
+import alireza.nezami.common.extensions.orEmptyList
 import alireza.nezami.designsystem.R
 import alireza.nezami.designsystem.component.DynamicAsyncImage
 import alireza.nezami.designsystem.component.HeightSpacer
 import alireza.nezami.designsystem.component.Rating
 import alireza.nezami.designsystem.component.Tab
-import alireza.nezami.designsystem.component.ScrollableTabRow
 import alireza.nezami.designsystem.component.TabRow
 import alireza.nezami.designsystem.component.TopAppBar
 import alireza.nezami.designsystem.component.WidthSpacer
 import alireza.nezami.detail.presentation.contract.DetailIntent
 import alireza.nezami.detail.presentation.contract.DetailTabState
 import alireza.nezami.detail.presentation.contract.DetailUiState
+import alireza.nezami.model.movieDetial.ProductionCompany
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -23,12 +24,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -79,8 +82,59 @@ fun DetailContent(uiState: DetailUiState, onIntent: (DetailIntent) -> Unit) {
             shown = uiState.selectedTabIndex == DetailTabState.Overview.index,
             overview = uiState.movieDetail?.overview.orEmpty()
         )
+        productionContent(
+            shown = uiState.selectedTabIndex == DetailTabState.Production.index,
+            productionList = uiState.movieDetail?.productionCompanies.orEmptyList()
+        )
     }
 
+}
+
+fun LazyListScope.productionContent(shown: Boolean, productionList: List<ProductionCompany>) {
+    if (shown) {
+        items(productionList) { production ->
+            ProductionItem(production)
+            HeightSpacer(value = 8)
+            Divider(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun ProductionItem(production: ProductionCompany) {
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        DynamicAsyncImage(
+            contentDescription = "Production company",
+            modifier = Modifier
+                .size(36.dp)
+                .clip(
+                    shape = MaterialTheme.shapes.small
+                ),
+            imageUrl = production.logoPath
+        )
+
+        WidthSpacer(value = 16)
+
+        Text(
+            text = production.name,
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Medium,
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        )
+    }
 }
 
 fun LazyListScope.overViewContent(shown: Boolean, overview: String) {

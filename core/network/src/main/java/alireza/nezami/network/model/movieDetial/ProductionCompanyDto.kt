@@ -21,7 +21,7 @@ data class ProductionCompanyDto(
 fun ProductionCompanyDto?.asExternalModel(): ProductionCompany {
     return ProductionCompany(
         id = this?.id.orZero(),
-        logoPath = this?.logoPath.orEmpty(),
+        logoPath = "https://image.tmdb.org/t/p/original/${this?.logoPath.orEmpty()}",
         name = this?.name.orEmpty(),
         originCountry = this?.originCountry.orEmpty()
     )
