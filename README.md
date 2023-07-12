@@ -11,6 +11,8 @@ The application has four main screens:
 -   **Favorites**: This screen lists all of the movies that the user has favorited.
 - ## Screenshots
 
+![Screenshot showing Home, Detail, Search and Favorite screens](docs/images/screenshot.png "Screenshot showing Home, Detail, Search and Favorite screens")
+
 
 # Architecture
 The **Movie** app follows the [official architecture guidance](https://developer.android.com/topic/architecture) and is built on **MVI** architecture. The Model-View-Intent (MVI) architecture is a design pattern used in Android app development. It focuses on unidirectional data flow and separation of concerns to create more predictable and testable code. Here's a brief overview of the MVI architecture in Android:
@@ -47,7 +49,7 @@ The core module, contain various modules inside it that providing data to the fe
 
 
 # Development Environment
-**Now in Android**  uses the Gradle build system and can be imported directly into Android Studio.
+**Move App**  uses the Gradle build system and can be imported directly into Android Studio.
 
 Change the run configuration to  `app`.
 
