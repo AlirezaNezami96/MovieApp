@@ -47,4 +47,7 @@ dependencies {
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito)
 }
