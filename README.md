@@ -2,6 +2,9 @@
 
 This repository contains the source code for a movie application that uses the The **Movie Database API**. This app is a fully functional Android app built entirely with Kotlin and Jetpack Compose. It follows Android design and development best practices and is intended to be a useful reference for developers. The application is well-documented and follows best practices like Google's **NowInAndroid** repository for code reusability. It is also user-friendly and easy to navigate.
 
+You can download the APK to install on you device with this link 👇
+<a href="https://mega.nz/file/xAhHzRga#3V-JMniLm5gEO7JP5wjEA71VqrpLDlo937rbMus6We0"><img src="https://www.pngall.com/wp-content/uploads/2/Download-Button-PNG-File-Download-Free.png" height="70"></a>
+
 # Features
 The application has four main screens:
 
