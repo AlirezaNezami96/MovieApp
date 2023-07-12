@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
@@ -344,7 +345,7 @@ fun LazyListScope.header(uiState: DetailUiState, onIntent: (DetailIntent) -> Uni
     item {
         uiState.movieDetail?.let { movieDetail ->
 
-            ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
+            ConstraintLayout(modifier = Modifier) {
                 val (poster, backDrop, title, vote) = createRefs()
 
                 DynamicAsyncImage(
@@ -398,9 +399,7 @@ fun LazyListScope.header(uiState: DetailUiState, onIntent: (DetailIntent) -> Uni
                             top.linkTo(backDrop.bottom, 8.dp)
                             start.linkTo(poster.end, 16.dp)
                         }
-                        .fillMaxWidth(),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                        .wrapContentWidth(),
                 )
             }
         }
@@ -421,6 +420,8 @@ fun LazyListScope.topBar(uiState: DetailUiState, onIntent: (DetailIntent) -> Uni
             },
             actionIcon = if (uiState.isFavorite) Icons.Outlined.Favorite
             else Icons.Outlined.FavoriteBorder,
+            actionIconTint = if (uiState.isFavorite) MaterialTheme.colorScheme.secondary
+            else null,
             onActionClick = {
                 onIntent.invoke(DetailIntent.OnFavoriteClick)
             }
