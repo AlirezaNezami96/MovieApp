@@ -47,7 +47,7 @@ The core module, contain various modules inside it that providing data to the fe
 
 
 # Development Environment
-**Now in Android**  uses the Gradle build system and can be imported directly into Android Studio.
+**Move App**  uses the Gradle build system and can be imported directly into Android Studio.
 
 Change the run configuration to  `app`.
 
