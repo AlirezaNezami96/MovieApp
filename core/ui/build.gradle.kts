@@ -28,17 +28,22 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
+
+    buildFeatures {
+        compose = true
+    }
+
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    api(libs.material3)
+    api(libs.androidx.compose.runtime)
+    api(libs.material3)
+    api(libs.toolingPreview)
+    implementation(libs.coreKtx)
+    implementation(libs.coil.kt.compose)
 }

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MovieApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MovieApp" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#242A32</item>
+        <item name="android:colorBackground">#242A32</item>
+    </style>
+
+    <style name="Theme.MovieApp.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#242A32</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_favorite_no_result</item>
+    </style>
 </resources>

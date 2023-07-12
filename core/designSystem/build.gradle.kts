@@ -31,14 +31,23 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(project(":core:common"))
 
+    implementation(libs.lifecycleRuntimeKtx)
     api(libs.material3)
     api(libs.androidx.compose.runtime)
+    api(libs.material3)
     api(libs.toolingPreview)
+    api(libs.tooling)
     implementation(libs.coreKtx)
     implementation(libs.coil.kt.compose)
+
 }

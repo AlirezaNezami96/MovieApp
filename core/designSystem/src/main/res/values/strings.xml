@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="not_connected">⚠️ You aren’t connected to the internet</string>
+    <string name="movie_result_was_empty">we are sorry, we can not find the movie :(</string>
+    <string name="find_movies_by_title">"Find your movie by Type title, categories, years, etc "</string>
+    <string name="there_is_no_movies_yet">There is no movie yet!</string>
+    <string name="what_do_you_want_to_watch">What do you want to watch?</string>
+    <string name="now_playing">Now playing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular">Popular</string>
+    <string name="nothing_left_to_show">There is nothing to show!</string>
+    <string name="there_was_an_error">There was an error!</string>
+    <string name="detail">Detail</string>
+    <string name="info">Info</string>
+    <string name="overview">Overview</string>
+    <string name="production">Production</string>
+    <string name="genres">Genres</string>
+    <string name="budget">Budget</string>
+    <string name="release_date">Release Date</string>
+    <string name="status">Status</string>
+    <string name="revenue">Revenue</string>
+    <string name="vote_average">Vote Average</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="adult">Adult</string>
+</resources>

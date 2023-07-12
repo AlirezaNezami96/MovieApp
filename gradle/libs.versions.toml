@@ -10,23 +10,32 @@ lifecycleRuntimeKtxVersion = "2.3.1"
 composeBomVersion = "2022.10.00"
 material3Version = "1.1.1"
 toolingPreviewVersion = "1.4.3"
+toolingVersion = "1.4.3"
 kotlinxSerializationJson = "1.5.1"
 retrofitKotlinxSerializationJson = "1.0.0"
 retrofit = "2.9.0"
 kotlinxCoroutines = "1.6.4"
 hilt = "2.46.1"
 androidxHiltNavigationCompose = "1.0.0"
+navigationCompose = "2.6.0"
 okhttp = "4.10.0"
 roomVersion = "2.5.2"
 coil = "2.2.2"
-
+viewModelVersion = "2.6.1"
+viewModelComposeVersion = ":2.6.1"
+timber = "4.7.1"
+androidxCoreSplashscreen = "1.0.0"
+constraintlayoutVersion = "1.0.1"
 
 [libraries]
 kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewModelVersion" }
+viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewModelComposeVersion" }
 lifecycleRunTimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRunTimeKtx" }
 activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "composeVersion" }
+navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 uiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "composeVersion" }
 kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinBomVersion" }
@@ -34,6 +43,7 @@ lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", ver
 composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version"}
 toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "toolingPreviewVersion" }
+tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "toolingPreviewVersion" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -44,5 +54,10 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutVersion" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+

@@ -35,4 +35,7 @@ android {
 
 dependencies {
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.hilt.android)
+    implementation(libs.viewModel)
+    implementation(libs.timber)
 }

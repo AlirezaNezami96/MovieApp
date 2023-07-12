@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
@@ -36,8 +38,14 @@ android {
 dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:model"))
+    implementation(project(":core:database"))
+    implementation(project(":core:common"))
 
     implementation(libs.coreKtx)
+    implementation(libs.timber)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(platform(libs.kotlinBom))
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }
