@@ -86,7 +86,7 @@ fun ScrollableTabRow(
 }
 
 /**
- * Tab row. Wraps Material 3 [ScrollableTabRow].
+ * Tab row. Wraps Material 3 [TabRow].
  *
  * @param selectedTabIndex The index of the currently selected tab.
  * @param modifier Modifier to be applied to the tab row.

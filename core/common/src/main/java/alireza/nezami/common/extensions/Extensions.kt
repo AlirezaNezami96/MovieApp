@@ -86,4 +86,3 @@ fun Int?.formatWithCommas(): String {
 
     return formattedValue.toString()
 }
-

@@ -1,5 +1,6 @@
 package alireza.nezami.detail.presentation
 
+import alireza.nezami.common.extensions.formatWithCommas
 import alireza.nezami.common.extensions.orEmptyList
 import alireza.nezami.common.extensions.toYesOrNo
 import alireza.nezami.designsystem.R
@@ -41,14 +42,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -112,14 +111,14 @@ fun LazyListScope.infoContent(shown: Boolean, movie: MovieDetail?) {
                 InfoItem(
                     title = stringResource(R.string.genres),
                     icon = R.drawable.ic_genre,
-                    text = movieDetail.genres.joinToString(",") { it.name }
+                    text = movieDetail.genres.joinToString(", ") { it.name }
                 )
             }
             item {
                 InfoItem(
                     title = stringResource(R.string.budget),
                     icon = R.drawable.ic_revenue,
-                    text = movieDetail.budget.toString()
+                    text = movieDetail.budget.formatWithCommas()
                 )
             }
             item {
@@ -140,7 +139,7 @@ fun LazyListScope.infoContent(shown: Boolean, movie: MovieDetail?) {
                 InfoItem(
                     title = stringResource(R.string.revenue),
                     icon = R.drawable.ic_revenue,
-                    text = movieDetail.revenue.toString()
+                    text = movieDetail.revenue.formatWithCommas()
                 )
             }
             item {
@@ -154,7 +153,7 @@ fun LazyListScope.infoContent(shown: Boolean, movie: MovieDetail?) {
                 InfoItem(
                     title = stringResource(R.string.vote_count),
                     icon = R.drawable.ic_status,
-                    text = movieDetail.voteCount.toString()
+                    text = movieDetail.voteCount.formatWithCommas()
                 )
             }
             item {
@@ -301,7 +300,7 @@ fun LazyListScope.briefInfo(uiState: DetailUiState) {
                 )
                 RowInfo(
                     icon = R.drawable.ic_revenue,
-                    text = movieDetail.revenue.toString()
+                    text = movieDetail.revenue.formatWithCommas()
                 )
                 RowInfo(
                     icon = R.drawable.ic_genre,
@@ -333,12 +332,12 @@ fun RowInfo(
         style = MaterialTheme.typography.bodySmall.copy(
             color = MaterialTheme.colorScheme.onSurface,
         ),
-        modifier = Modifier.padding(start = 4.dp),
+        modifier = Modifier.padding(start = 6.dp),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )
 
-    WidthSpacer(value = 16)
+    WidthSpacer(value = 24)
 }
 
 fun LazyListScope.header(uiState: DetailUiState, onIntent: (DetailIntent) -> Unit) {

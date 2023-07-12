@@ -70,7 +70,7 @@ data class GetMovieDetailResponseDto(
 fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
     return MovieDetail(
         adult = this?.adult.orFalse(),
-        backdropPath = "https://image.tmdb.org/t/p/w500/${this?.backdropPath.orEmpty()}",
+        backdropPath = "https://image.tmdb.org/t/p/original/${this?.backdropPath.orEmpty()}",
         belongsToCollection = this?.belongsToCollection.asExternalModel(),
         budget = this?.budget.orZero(),
         genres = this?.genres?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
