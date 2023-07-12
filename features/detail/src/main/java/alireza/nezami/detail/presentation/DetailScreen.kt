@@ -411,9 +411,6 @@ fun LazyListScope.topBar(uiState: DetailUiState, onIntent: (DetailIntent) -> Uni
     item {
         TopAppBar(
             titleRes = R.string.detail,
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = Color.Transparent,
-            ),
             navigationIcon = Icons.Rounded.KeyboardArrowLeft,
             onNavigationClick = {
                 onIntent.invoke(DetailIntent.OnNavigateBackClick)
