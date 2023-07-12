@@ -42,15 +42,9 @@ fun SearchMovieCard(
     voteCount: Int,
     onMovieCardClick: () -> Unit
 ) {
-    val isOddPosition = position % 2 != 0
-    val gradientColors =
-        if (isOddPosition) listOf(
+    val gradientColors = listOf(
             Color(0xFF34495E),
             Color(0xFF2C3E50)
-        )
-        else listOf(
-            Color(0xFF54298E),
-            Color(0xFF240046)
         )
 
     Card(

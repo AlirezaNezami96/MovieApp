@@ -63,7 +63,7 @@ fun SearchInput(
                 color = MaterialTheme.colorScheme.onBackground.copy(
                     alpha = 0.2f
                 ),
-                shape = MaterialTheme.shapes.medium
+                shape = MaterialTheme.shapes.large
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {

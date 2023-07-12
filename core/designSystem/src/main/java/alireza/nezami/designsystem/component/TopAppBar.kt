@@ -27,19 +27,26 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar(
+    modifier: Modifier = Modifier,
     @StringRes titleRes: Int,
     navigationIcon: ImageVector,
     navigationIconContentDescription: String? = null,
     actionIcon: ImageVector,
     actionIconTint: Color? = null,
     actionIconContentDescription: String? = null,
-    modifier: Modifier = Modifier,
-    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+        containerColor = Color.Transparent,
+    ),
     onNavigationClick: () -> Unit = {},
     onActionClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(text = stringResource(id = titleRes)) },
+        title = {
+            Text(
+                text = stringResource(id = titleRes),
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        },
         navigationIcon = {
             IconButton(onClick = onNavigationClick) {
                 Icon(
@@ -60,37 +67,7 @@ fun TopAppBar(
         },
         colors = colors,
         modifier = modifier
-            .testTag("topAppBar")
             .heightIn(max = 64.dp),
-    )
-}
-
-/**
- * Top app bar with action, displayed on the right
- */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar(
-    @StringRes titleRes: Int,
-    actionIcon: ImageVector,
-    actionIconContentDescription: String?,
-    modifier: Modifier = Modifier,
-    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
-    onActionClick: () -> Unit = {},
-) {
-    CenterAlignedTopAppBar(
-        title = { Text(text = stringResource(id = titleRes)) },
-        actions = {
-            IconButton(onClick = onActionClick) {
-                Icon(
-                    imageVector = actionIcon,
-                    contentDescription = actionIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                )
-            }
-        },
-        colors = colors,
-        modifier = modifier.testTag("topAppBar"),
     )
 }
 
