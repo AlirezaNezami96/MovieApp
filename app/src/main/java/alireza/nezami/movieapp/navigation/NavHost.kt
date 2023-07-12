@@ -1,5 +1,7 @@
 package alireza.nezami.movieapp.navigation
 
+import alireza.nezami.detail.navigation.detailScreen
+import alireza.nezami.detail.navigation.navigateToDetail
 import alireza.nezami.favorite.navigation.favoriteScreen
 import alireza.nezami.home.navigation.homeNavigationRoute
 import alireza.nezami.home.navigation.moviesScreen
@@ -30,18 +32,24 @@ fun AppNavHost(
         modifier = modifier,
     ) {
         moviesScreen(
-            onMovieClick = {},
+            onMovieClick = navController::navigateToDetail,
             onSearchClick = {
                 navController.navigateToSearch()
             }
         )
 
         searchScreen(
-            onMovieClick = {}
+            onMovieClick = navController::navigateToDetail
         )
 
         favoriteScreen(
-            onMovieClick = {}
+            onMovieClick = navController::navigateToDetail
         )
+
+        detailScreen(
+            navigateUp = navController::navigateUp
+        )
+
     }
 }
+

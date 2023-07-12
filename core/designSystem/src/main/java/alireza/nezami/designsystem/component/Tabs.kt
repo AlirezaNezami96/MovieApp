@@ -6,7 +6,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
@@ -56,7 +55,38 @@ fun Tab(
 }
 
 /**
- * Tab row. Wraps Material 3 [TabRow].
+ * Tab row. Wraps Material 3 [ScrollableTabRow].
+ *
+ * @param selectedTabIndex The index of the currently selected tab.
+ * @param modifier Modifier to be applied to the tab row.
+ * @param tabs The tabs inside this tab row. Typically this will be multiple [Tab]s. Each element
+ * inside this lambda will be measured and placed evenly across the row, each taking up equal space.
+ */
+@Composable
+fun ScrollableTabRow(
+    selectedTabIndex: Int,
+    modifier: Modifier = Modifier,
+    tabs: @Composable () -> Unit,
+) {
+    ScrollableTabRow(
+        selectedTabIndex = selectedTabIndex,
+        edgePadding = 0.dp,
+        modifier = modifier,
+        containerColor = Color.Transparent,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        indicator = { tabPositions ->
+            TabRowDefaults.Indicator(
+                modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                height = 2.dp,
+                color = MaterialTheme.colorScheme.primary,
+            )
+        },
+        tabs = tabs,
+    )
+}
+
+/**
+ * Tab row. Wraps Material 3 [ScrollableTabRow].
  *
  * @param selectedTabIndex The index of the currently selected tab.
  * @param modifier Modifier to be applied to the tab row.
@@ -69,9 +99,8 @@ fun TabRow(
     modifier: Modifier = Modifier,
     tabs: @Composable () -> Unit,
 ) {
-    ScrollableTabRow(
+    androidx.compose.material3.TabRow(
         selectedTabIndex = selectedTabIndex,
-        edgePadding = 0.dp,
         modifier = modifier,
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onSurface,

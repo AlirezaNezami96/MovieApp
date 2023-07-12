@@ -21,6 +21,12 @@ interface FavoriteDao {
     @Query(value = "SELECT * FROM favorites")
     fun getMovieDetail(): Flow<List<MovieEntity>>
 
+
+    @Transaction
+    @Query(value = "SELECT * FROM favorites WHERE id = :id LIMIT 1")
+    fun getMovieDetail(id: Int): Flow<MovieEntity?>
+
+
     /**
      * Inserts [entity] into the db if they don't exist, and replaces those that do
      */

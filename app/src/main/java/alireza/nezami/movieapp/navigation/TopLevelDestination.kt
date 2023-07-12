@@ -3,6 +3,7 @@ package alireza.nezami.movieapp.navigation
 import alireza.nezami.designsystem.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.rounded.Favorite
@@ -26,7 +27,7 @@ enum class TopLevelDestination(
         titleTextId = R.string.search,
     ),
     FAVORITE(
-        selectedIcon = Icons.Outlined.Favorite,
+        selectedIcon = Icons.Outlined.FavoriteBorder,
         iconTextId = R.string.favorite,
         titleTextId = R.string.favorite,
     ),

@@ -5,7 +5,7 @@ import alireza.nezami.designsystem.component.HeightSpacer
 import alireza.nezami.designsystem.component.MovieCard
 import alireza.nezami.designsystem.component.SearchInput
 import alireza.nezami.designsystem.component.Tab
-import alireza.nezami.designsystem.component.TabRow
+import alireza.nezami.designsystem.component.ScrollableTabRow
 import alireza.nezami.designsystem.extensions.collectWithLifecycle
 import alireza.nezami.home.presentation.movieList.contract.MoviesEvent
 import alireza.nezami.home.presentation.movieList.contract.MoviesIntent
@@ -58,7 +58,7 @@ fun MoviesScreen(
     HandleEvents(
         events = viewModel.event,
         navigateToMovieDetail = onMovieClick,
-        NavigateToSearch = onSearchClick
+        navigateToSearch = onSearchClick
     )
 
     MoviesContent(
@@ -255,7 +255,7 @@ private fun TabContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit)
         R.string.top_rated,
         R.string.popular,
     )
-    TabRow(selectedTabIndex = uiState.selectedTabIndex) {
+    ScrollableTabRow(selectedTabIndex = uiState.selectedTabIndex) {
         titles.forEachIndexed { index, title ->
             Tab(
                 selected = uiState.selectedTabIndex == index,
@@ -272,11 +272,11 @@ private fun TabContent(uiState: MoviesUiState, onIntent: (MoviesIntent) -> Unit)
 private fun HandleEvents(
     events: Flow<MoviesEvent>,
     navigateToMovieDetail: (Int) -> Unit,
-    NavigateToSearch: () -> Unit
+    navigateToSearch: () -> Unit
 ) {
     events.collectWithLifecycle {
         when (it) {
-            MoviesEvent.NavigateToSearch -> NavigateToSearch()
+            MoviesEvent.NavigateToSearch -> navigateToSearch()
             is MoviesEvent.NavigateToMovieDetail -> navigateToMovieDetail(it.id)
         }
     }

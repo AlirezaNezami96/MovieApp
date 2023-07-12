@@ -14,4 +14,16 @@
     <string name="popular">Popular</string>
     <string name="nothing_left_to_show">There is nothing to show!</string>
     <string name="there_was_an_error">There was an error!</string>
+    <string name="detail">Detail</string>
+    <string name="info">Info</string>
+    <string name="overview">Overview</string>
+    <string name="production">Production</string>
+    <string name="genres">Genres</string>
+    <string name="budget">Budget</string>
+    <string name="release_date">Release Date</string>
+    <string name="status">Status</string>
+    <string name="revenue">Revenue</string>
+    <string name="vote_average">Vote Average</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="adult">Adult</string>
 </resources>

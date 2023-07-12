@@ -1,12 +1,15 @@
 package alireza.nezami.network.model.movieDetial
 
 
+import alireza.nezami.common.extensions.formatToOneDecimalPlace
 import alireza.nezami.common.extensions.orFalse
 import alireza.nezami.common.extensions.orZero
+import alireza.nezami.common.utils.DateUtils
 import alireza.nezami.model.movieDetial.BelongsToCollection
 import alireza.nezami.model.movieDetial.MovieDetail
 import alireza.nezami.network.model.genre.GenreResponse
 import alireza.nezami.network.model.genre.asExternalModel
+import alireza.nezami.network.model.movie.asExternalModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -67,7 +70,7 @@ data class GetMovieDetailResponseDto(
 fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
     return MovieDetail(
         adult = this?.adult.orFalse(),
-        backdropPath = this?.backdropPath.orEmpty(),
+        backdropPath = "https://image.tmdb.org/t/p/w500/${this?.backdropPath.orEmpty()}",
         belongsToCollection = this?.belongsToCollection.asExternalModel(),
         budget = this?.budget.orZero(),
         genres = this?.genres?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
@@ -78,10 +81,10 @@ fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
         originalTitle = this?.originalTitle.orEmpty(),
         overview = this?.overview.orEmpty(),
         popularity = this?.popularity.orZero(),
-        posterPath = this?.posterPath.orEmpty(),
+        posterPath = "https://image.tmdb.org/t/p/w185/${this?.posterPath.orEmpty()}",
         productionCompanies = this?.productionCompanies?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
         productionCountries = this?.productionCountries?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
-        releaseDate = this?.releaseDate.orEmpty(),
+        releaseDate = DateUtils.getYearFromDate(this?.releaseDate.orEmpty()),
         revenue = this?.revenue.orZero(),
         runtime = this?.runtime.orZero(),
         spokenLanguages = this?.spokenLanguages?.mapNotNull { it?.asExternalModel() } ?: emptyList(),
@@ -89,7 +92,7 @@ fun GetMovieDetailResponseDto?.asExternalModel(): MovieDetail {
         tagline = this?.tagline.orEmpty(),
         title = this?.title.orEmpty(),
         video = this?.video.orFalse(),
-        voteAverage = this?.voteAverage.orZero(),
+        voteAverage = this?.voteAverage.formatToOneDecimalPlace().orZero(),
         voteCount = this?.voteCount.orZero()
     )
 }

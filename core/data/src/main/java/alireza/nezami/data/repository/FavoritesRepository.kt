@@ -15,6 +15,11 @@ interface FavoritesRepository {
     suspend fun getFavoriteMovies(): Flow<List<Movie>>
 
     /*
+        Gets the Movie status if it's flagged as favorite
+     */
+    suspend fun isMovieFavorite(id: Int): Flow<Boolean>
+
+    /*
         Deletes the selected movie from favorite list
      */
     suspend fun deleteFavoriteMovie(id: Int)
