@@ -28,21 +28,21 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    SearchUiState: DetailUiState,
+    detailUiState: DetailUiState,
     private val movieDetailUseCase: GetMovieDetailUseCase,
     private val isMovieFavoriteUseCase: IsMovieFavoriteUseCase,
     private val addMovieToFavoriteUseCase: AddMovieToFavoriteUseCase,
     private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
 ) : BaseViewModel<DetailUiState, DetailUiState.PartialState, DetailEvent, DetailIntent>(
     savedStateHandle,
-    SearchUiState
+    detailUiState
 ) {
 
-    private val detailArgs: DetailArgs = DetailArgs(savedStateHandle)
+//    private val detailArgs: DetailArgs = DetailArgs(savedStateHandle)
 
     init {
-        acceptIntent(DetailIntent.GetMovieDetail(detailArgs.movieId.toInt()))
-        acceptIntent(DetailIntent.GetIsMovieFavorite(detailArgs.movieId.toInt()))
+        acceptIntent(DetailIntent.GetMovieDetail(1))
+        acceptIntent(DetailIntent.GetIsMovieFavorite(1))
     }
 
     override fun mapIntents(intent: DetailIntent): Flow<DetailUiState.PartialState> =

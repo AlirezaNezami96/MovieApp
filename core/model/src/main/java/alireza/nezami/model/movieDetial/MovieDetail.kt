@@ -7,32 +7,33 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieDetail(
-    val adult: Boolean,
-    val backdropPath: String,
-    val belongsToCollection: BelongsToCollection,
-    val budget: Int,
-    val genres: List<Genre>,
-    val homepage: String,
-    val id: Int,
-    val imdbId: String,
-    val originalLanguage: String,
-    val originalTitle: String,
-    val overview: String,
-    val popularity: Double,
-    val posterPath: String,
-    val productionCompanies: List<ProductionCompany>,
-    val productionCountries: List<ProductionCountry>,
-    val releaseDate: String,
-    val revenue: Int,
-    val runtime: Int,
-    val spokenLanguages: List<SpokenLanguage>,
-    val status: String,
-    val tagline: String,
-    val title: String,
-    val video: Boolean,
-    val voteAverage: Double,
-    val voteCount: Int
+    val adult: Boolean = false,
+    val backdropPath: String = "",
+    val belongsToCollection: BelongsToCollection? = null,
+    val budget: Int = 0,
+    val genres: List<Genre> = listOf(),
+    val homepage: String = "",
+    val id: Int = 0,
+    val imdbId: String = "",
+    val originalLanguage: String = "",
+    val originalTitle: String = "",
+    val overview: String = "",
+    val popularity: Double = 0.0,
+    val posterPath: String = "",
+    val productionCompanies: List<ProductionCompany> = listOf(),
+    val productionCountries: List<ProductionCountry> = listOf(),
+    val releaseDate: String = "",
+    val revenue: Int = 0,
+    val runtime: Int = 0,
+    val spokenLanguages: List<SpokenLanguage> = listOf(),
+    val status: String = "",
+    val tagline: String = "",
+    val title: String = "",
+    val video: Boolean = false,
+    val voteAverage: Double = 0.0,
+    val voteCount: Int = 0
 ) : Parcelable
+
 
 /**
  * Extension function to map a [MovieDetail] object into a [Movie] object.
